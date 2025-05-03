@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories - Horror Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; /* Light Mode Default */
+    color: #333; /* Light Mode Default */
+    transition: all 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #121212; /* Dark Mode Background */
+    color: #f5f5f5; /* Dark Mode Text */
+}
+
+/* Variable Definitions (Optional - can be helpful for consistency) */
+:root {
+    --primary-color-light: #d11d1d;
+    --secondary-color-light: #b31818;
+    --text-color-light: #333;
+    --bg-color-light: #f5f5f5;
+    --card-bg-light: white;
+    --accent-color-light: #d11d1d;
+    --dark-gray-light: #333; /* Used for borders, etc. */
+
+    --primary-color-dark: #ff4d4d;
+    --secondary-color-dark: #e63939;
+    --text-color-dark: #f5f5f5;
+    --bg-color-dark: #121212;
+    --card-bg-dark: #2d2d2d;
+    --accent-color-dark: #ff4d4d;
+    --dark-gray-dark: #333; /* Still using a dark gray for borders in dark mode */
+}
+
+/* Apply Variables based on Dark Mode */
+body {
+    color: var(--text-color-light);
+    background-color: var(--bg-color-light);
+}
+
+body.dark-mode {
+    color: var(--text-color-dark);
+    background-color: var(--bg-color-dark);
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Loader Styles */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loader-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #d11d1d; /* Light Mode Spinner Color */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+body.dark-mode .loader-spinner {
+     border-top-color: #ff4d4d; /* Dark Mode Spinner Color */
+}
+
+
+.loader-text {
+    color: white;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #1a1a1a; /* Common for both, or use rgba for transparency */
+    color: white; /* Common for both, or use variables */
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light Mode Shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+}
+
+body.dark-mode .navbar {
+     /* Dark Mode Navbar adjustments if needed */
+     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Dark Mode Shadow */
+}
+
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: white; /* Common for both */
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-items {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-items li {
+    margin-left: 20px;
+}
+
+.nav-items a {
+    color: white; /* Common for both */
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-items a:hover {
+    color: #d11d1d; /* Light Mode Hover */
+}
+body.dark-mode .nav-items a:hover {
+    color: #ff4d4d; /* Dark Mode Hover */
+}
+
+
+.nav-items a.active {
+    color: #d11d1d; /* Light Mode Active */
+    font-weight: bold;
+}
+body.dark-mode .nav-items a.active {
+    color: #ff4d4d; /* Dark Mode Active */
+}
+
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: white; /* Common for both */
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease; /* Added transform */
+}
+
+.theme-toggle:hover {
+    color: #d11d1d; /* Light Mode Hover */
+    transform: rotate(30deg); /* Common for both */
+}
+body.dark-mode .theme-toggle:hover {
+    color: #ff4d4d; /* Dark Mode Hover */
+}
+
+
+.mobile-menu-btn {
+    display: none; /* Handled by media query */
+    background: none;
+    border: none;
+    color: white; /* Common for both */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0; /* Start from left */
+    width: 100%; /* Full width on mobile */
+    max-width: 300px; /* Max width for slide-out effect */
+    height: 100%;
+    background-color: #1a1a1a; /* Common for both */
+    z-index: 1001;
+    transform: translateX(-100%); /* Hidden by default */
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+body.dark-mode .mobile-menu {
+    /* Dark Mode Mobile Menu adjustments if needed */
+}
+
+
+.mobile-menu.active {
+    transform: translateX(0); /* Show menu when active */
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #333; /* Common border */
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    color: white; /* Common for both */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-nav-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav-items li {
+    border-bottom: 1px solid #333; /* Common border */
+}
+
+.mobile-nav-items a {
+    display: block;
+    padding: 15px 20px;
+    color: white; /* Common for both */
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.mobile-nav-items a:hover {
+    background-color: #333; /* Common hover effect */
+}
+
+.mobile-nav-items a.active {
+    color: #d11d1d; /* Light Mode Active */
+    font-weight: bold;
+}
+body.dark-mode .mobile-nav-items a.active {
+    color: #ff4d4d; /* Dark Mode Active */
+}
+
+
+.mobile-theme-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    color: white; /* Common for both */
+    cursor: pointer;
+    border-top: 1px solid #333; /* Common border */
+}
+
+.mobile-theme-toggle i {
+    font-size: 1.2rem;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding-top: 80px;
+    min-height: calc(100vh - 160px); /* Adjust based on footer height */
+}
+
+.categories-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x600/?horror');
+    background-size: cover;
+    background-position: center;
+    color: white; /* Common for both */
+    padding: 100px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.categories-hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Common for both */
+}
+
+.categories-hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Common for both */
+}
+
+/* Categories Grid Styles */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.category-card {
+    background-color: white; /* Light Mode Background */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Light Mode Shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Added background-color */
+}
+
+body.dark-mode .category-card {
+    background-color: #2d2d2d; /* Dark Mode Background */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Dark Mode Shadow */
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Light Mode Hover Shadow */
+}
+body.dark-mode .category-card:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Dark Mode Hover Shadow */
+}
+
+
+.category-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.category-content {
+    padding: 20px;
+}
+
+.category-content h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #d11d1d; /* Light Mode Heading Color */
+    transition: color 0.3s ease; /* Added transition */
+}
+
+body.dark-mode .category-content h2 {
+    color: #ff4d4d; /* Dark Mode Heading Color */
+}
+
+.category-content p {
+    margin-bottom: 20px;
+    color: #666; /* Light Mode Paragraph Color */
+    transition: color 0.3s ease; /* Added transition */
+}
+
+body.dark-mode .category-content p {
+    color: #aaa; /* Dark Mode Paragraph Color */
+}
+
+.category-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d11d1d; /* Light Mode Button */
+    color: white; /* Common for both */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.category-btn:hover {
+    background-color: #b31818; /* Light Mode Button Hover */
+}
+
+body.dark-mode .category-btn {
+    background-color: #ff4d4d; /* Dark Mode Button */
+}
+
+body.dark-mode .category-btn:hover {
+    background-color: #e63939; /* Dark Mode Button Hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #1a1a1a; /* Common for both, or use variables */
+    color: white; /* Common for both, or use variables */
+    padding: 40px 0 20px;
+}
+
+body.dark-mode footer {
+     /* Dark Mode Footer adjustments if needed */
+}
+
+
+.new-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.new-footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.new-footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.new-footer-logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.new-footer-logo h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.new-footer-newsletter h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.new-footer-newsletter p {
+    margin-bottom: 15px;
+    color: #aaa; /* Common for both, or use variables */
+}
+body.dark-mode .new-footer-newsletter p {
+     /* Dark Mode Paragraph adjustments if needed */
+}
+
+
+.new-subscribe-form {
+    display: flex;
+}
+
+.new-subscribe-form input {
+    padding: 10px;
+    border: 1px solid #333; /* Common border */
+    border-radius: 5px 0 0 5px;
+    width: 250px;
+    font-size: 1rem;
+    background-color: white; /* Light Mode Input */
+    color: #333; /* Light Mode Input Text */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Added transitions */
+}
+body.dark-mode .new-subscribe-form input {
+    background-color: #121212; /* Dark Mode Input */
+    color: #f5f5f5; /* Dark Mode Input Text */
+    border-color: #555; /* Dark Mode Border */
+}
+
+
+.new-subscribe-form button {
+    padding: 10px 20px;
+    background-color: #d11d1d; /* Light Mode Button */
+    color: white; /* Common for both */
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.new-subscribe-form button:hover {
+    background-color: #b31818; /* Light Mode Button Hover */
+}
+body.dark-mode .new-subscribe-form button {
+    background-color: #ff4d4d; /* Dark Mode Button */
+}
+body.dark-mode .new-subscribe-form button:hover {
+    background-color: #e63939; /* Dark Mode Button Hover */
+}
+
+
+.new-footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.new-footer-column h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #d11d1d; /* Light Mode Heading */
+    transition: color 0.3s ease; /* Added transition */
+}
+body.dark-mode .new-footer-column h3 {
+    color: #ff4d4d; /* Dark Mode Heading */
+}
+
+
+.new-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.new-footer-links li {
+    margin-bottom: 10px;
+}
+
+.new-footer-links a {
+    color: #aaa; /* Common for both */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.new-footer-links a:hover {
+    color: white; /* Common hover effect */
+}
+
+.new-social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.new-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #333; /* Common background */
+    color: white; /* Common color */
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.new-social-link:hover {
+    background-color: #d11d1d; /* Light Mode Hover */
+}
+body.dark-mode .new-social-link:hover {
+    background-color: #ff4d4d; /* Dark Mode Hover */
+}
+
+
+.new-footer-bottom {
+    border-top: 1px solid #333; /* Common border */
+    padding-top: 20px;
+    text-align: center;
+}
+
+.new-copyright {
+    margin: 0;
+    color: #aaa; /* Common for both */
+    font-size: 0.9rem;
+}
+
+/* FAB (Floating Action Button) */
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #d11d1d; /* Light Mode Button */
+    color: white; /* Common for both */
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light Mode Shadow */
+    transition: all 0.3s ease;
+    display: none; /* Handled by JS */
+    z-index: 99;
+}
+
+.fab:hover {
+    background-color: #b31818; /* Light Mode Button Hover */
+    transform: translateY(-5px); /* Common effect */
+}
+
+body.dark-mode .fab {
+    background-color: #ff4d4d; /* Dark Mode Button */
+}
+
+body.dark-mode .fab:hover {
+    background-color: #e63939; /* Dark Mode Button Hover */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .categories-hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .new-footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .new-footer-newsletter {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .new-subscribe-form {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-items {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .categories-hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .categories-hero-content p {
+        font-size: 1rem;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .categories-hero {
+        padding: 80px 0;
+    }
+
+    .new-subscribe-form input {
+        width: 200px;
+    }
+}
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <nav class="navbar" id="main-navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn-main">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-items">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="categories.html" class="active">Categories</a></li>
+                <li><a href="latest.html">Latest</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle-main">
+                        <i class="fas fa-moon"></i> </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-main">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-close" id="mobile-menu-close-main">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="categories.html" class="active">Categories</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-theme-toggle" id="mobile-theme-toggle-main">
+            <span>Dark Mode</span>
+            <i class="fas fa-moon"></i> </div>
+    </div>
+
+    <div class="main-content">
+        <section class="categories-hero">
+            <div class="categories-hero-content">
+                <h1>Horror Story Categories</h1>
+                <p>Browse our collection of terrifying tales by category</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="categories-grid">
+                <div class="category-card" data-category="ghosts">
+                    <div class="category-image">
+                        <img src="https://source.unsplash.com/random/600x400/?ghost" alt="Ghost Stories">
+                    </div>
+                    <div class="category-content">
+                        <h2>Mysterious</h2>
+                        <p>Chilling tales of spirits and hauntings</p>
+                        <a href="stories.html?category=Mysterious" class="category-btn">View Stories</a>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="demons">
+                    <div class="category-image">
+                        <img src="https://source.unsplash.com/random/600x400/?demon" alt="Demon Stories">
+                    </div>
+                    <div class="category-content">
+                        <h2>Demon Stories</h2>
+                        <p>Terrifying encounters with evil entities</p>
+                        <a href="stories.html?category=demons" class="category-btn">View Stories</a>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="urban-legends">
+                    <div class="category-image">
+                        <img src="https://source.unsplash.com/random/600x400/?urban,legend" alt="Urban Legends">
+                    </div>
+                    <div class="category-content">
+                        <h2>Urban Legends</h2>
+                        <p>Modern myths and local folklore</p>
+                        <a href="stories.html?category=urban-legends" class="category-btn">View Stories</a>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="true-stories">
+                    <div class="category-image">
+                        <img src="https://source.unsplash.com/random/600x400/?haunted,real" alt="True Stories">
+                    </div>
+                    <div class="category-content">
+                        <h2>True Stories</h2>
+                        <p>Documented paranormal experiences</p>
+                        <a href="stories.html?category=true-stories" class="category-btn">View Stories</a>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="psychological">
+                    <div class="category-image">
+                        <img src="https://source.unsplash.com/random/600x400/?mind,horror" alt="Psychological Horror">
+                    </div>
+                    <div class="category-content">
+                        <h2>Psychological Horror</h2>
+                        <p>Stories that play with your mind</p>
+                        <a href="stories.html?category=psychological" class="category-btn">View Stories</a>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="supernatural">
+                    <div class="category-image">
+                        <img src="https://source.unsplash.com/random/600x400/?supernatural" alt="Supernatural">
+                    </div>
+                    <div class="category-content">
+                        <h2>Supernatural</h2>
+                        <p>Unexplained phenomena and powers</p>
+                        <a href="stories.html?category=supernatural" class="category-btn">View Stories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="new-footer-container">
+            <div class="new-footer-top">
+                <div class="new-footer-logo">
+                    <img src="favicon.png" alt="Horror Stories Logo">
+                    <h2>D11 Horror Stories</h2>
+                </div>
+                <div class="new-footer-newsletter">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get the latest horror stories delivered to your inbox.</p>
+                    <form class="new-subscribe-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="new-footer-columns">
+                <div class="new-footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="new-footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="new-social-links">
+                        <a href="https://www.facebook.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/yourchannelname" class="new-social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: mandildissa11@gmail.com</p>
+                    <p>Phone: +94 71 317 1006</p>
+                </div>
+            </div>
+            <div class="new-footer-bottom">
+                <p class="new-copyright">© 2025 D11 Horror Stories. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="fab" id="fab">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn-main');
+            const mobileMenuClose = document.getElementById('mobile-menu-close-main');
+            const mobileMenu = document.getElementById('mobile-menu-main');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('active');
+                });
+            } else {
+                console.error('Mobile menu button not found!');
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            } else {
+                console.error('Mobile menu close button not found!');
+            }
+
+            // --- Dark Mode Toggle ---
+            const themeToggleBtnMain = document.getElementById('theme-toggle-main');
+            const themeToggleBtnMobile = document.getElementById('mobile-theme-toggle-main');
+            const body = document.body;
+            const darkModeClass = 'dark-mode';
+            const themeStorageKey = 'themePreference'; // Key for local storage
+
+            // Function to apply the saved theme
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add(darkModeClass);
+                    // Update icons
+                    if (themeToggleBtnMain) themeToggleBtnMain.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+                    if (themeToggleBtnMobile) themeToggleBtnMobile.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+                } else {
+                    body.classList.remove(darkModeClass);
+                     // Update icons
+                    if (themeToggleBtnMain) themeToggleBtnMain.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+                    if (themeToggleBtnMobile) themeToggleBtnMobile.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+                }
+            }
+
+            // Load theme preference from local storage on page load
+            const savedTheme = localStorage.getItem(themeStorageKey);
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                 // Default to light mode if no preference is saved
+                 applyTheme('light');
+            }
+
+
+            // Add event listener for the main theme toggle button
+            if (themeToggleBtnMain) {
+                themeToggleBtnMain.addEventListener('click', () => {
+                    if (body.classList.contains(darkModeClass)) {
+                        applyTheme('light'); // Switch to light mode
+                        localStorage.setItem(themeStorageKey, 'light');
+                    } else {
+                        applyTheme('dark'); // Switch to dark mode
+                        localStorage.setItem(themeStorageKey, 'dark');
+                    }
+                });
+            } else {
+                console.error('Main theme toggle button not found!');
+            }
+
+            // Add event listener for the mobile theme toggle button
+            if (themeToggleBtnMobile) {
+                 themeToggleBtnMobile.addEventListener('click', () => {
+                    if (body.classList.contains(darkModeClass)) {
+                        applyTheme('light'); // Switch to light mode
+                        localStorage.setItem(themeStorageKey, 'light');
+                    } else {
+                        applyTheme('dark'); // Switch to dark mode
+                        localStorage.setItem(themeStorageKey, 'dark');
+                    }
+                });
+            } else {
+                console.error('Mobile theme toggle container not found!');
+            }
+
+
+        }); // End DOMContentLoaded
+
+        // --- Loader Script ---
+        setTimeout(function() {
+            const loader = document.getElementById('loader');
+             if(loader) {
+                loader.style.display = 'none';
+            } else {
+                console.error('Loader element not found!');
+            }
+        }, 1000); // 1 seconds
+
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Horror Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* General Styles */
+:root {
+    --primary-color: #8b0000;
+    --secondary-color: #5a0000;
+    --text-color: #f0f0f0;
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --accent-color: #ff0000;
+    --light-gray: #e0e0e0;
+    --dark-gray: #333;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Canvas */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--bg-color);
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loader-text {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Navigation */
+.navbar {
+    background-color: rgba(18, 18, 18, 0.9);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.nav-items {
+    display: flex;
+    list-style: none;
+}
+
+.nav-items li {
+    margin-left: 1.5rem;
+}
+
+.nav-items a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-items a:hover {
+    color: var(--primary-color);
+}
+
+.nav-items a.active {
+    color: var(--primary-color);
+}
+
+.nav-items a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+    transform: rotate(30deg);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--card-bg);
+    z-index: 1100;
+    transition: var(--transition);
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--dark-gray);
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-nav-items {
+    list-style: none;
+    padding: 1.5rem;
+}
+
+.mobile-nav-items li {
+    margin-bottom: 1rem;
+}
+
+.mobile-nav-items a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    padding: 0.5rem 0;
+    transition: var(--transition);
+}
+
+.mobile-nav-items a:hover,
+.mobile-nav-items a.active {
+    color: var(--primary-color);
+}
+
+.mobile-theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--dark-gray);
+    cursor: pointer;
+}
+
+.mobile-theme-toggle span {
+    font-size: 1.1rem;
+}
+
+.mobile-theme-toggle i {
+    font-size: 1.2rem;
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 80px;
+    padding: 2rem 0;
+}
+
+/* Contact Hero */
+.contact-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.contact-hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.contact-hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Contact Container */
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.contact-info {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.contact-info p {
+    margin-bottom: 2rem;
+}
+
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.contact-method i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+    margin-top: 0.3rem;
+}
+
+.contact-method h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-method p {
+    margin-bottom: 0;
+}
+
+/* Contact Form */
+.contact-form {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--dark-gray);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.3);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: #0a0a0a;
+    color: var(--text-color);
+    padding: 3rem 0 1rem;
+}
+
+.new-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.new-footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--dark-gray);
+}
+
+.new-footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.new-footer-logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+.new-footer-logo h2 {
+    font-size: 1.5rem;
+}
+
+.new-footer-newsletter {
+    max-width: 400px;
+}
+
+.new-footer-newsletter h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.new-footer-newsletter p {
+    margin-bottom: 1rem;
+    color: #aaa;
+}
+
+.new-subscribe-form {
+    display: flex;
+}
+
+.new-subscribe-form input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid var(--dark-gray);
+    border-radius: 4px 0 0 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.new-subscribe-form button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.new-subscribe-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.new-footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.new-footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.new-footer-links {
+    list-style: none;
+}
+
+.new-footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.new-footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.new-footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.new-social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.new-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--dark-gray);
+    color: var(--text-color);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.new-social-link:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.new-footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--dark-gray);
+}
+
+.new-copyright {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* FAB (Floating Action Button) */
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.fab.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fab:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0 1rem;
+    }
+
+    .nav-items {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .contact-hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .contact-hero-content p {
+        font-size: 1rem;
+    }
+
+    .new-footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .new-footer-logo {
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .new-subscribe-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .contact-hero {
+        height: 250px;
+    }
+
+    .main-content {
+        margin-top: 70px;
+    }
+}
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <nav class="navbar" id="main-navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn-main">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-items">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="latest.html">Latest</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle-main">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-main">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-close" id="mobile-menu-close-main">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="contact.html" class="active">Contact Us</a></li>
+        </ul>
+        <div class="mobile-theme-toggle" id="mobile-theme-toggle-main">
+            <span>Dark Mode</span>
+            <i class="fas fa-moon"></i>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <section class="contact-hero">
+            <div class="contact-hero-content">
+                <h1>Contact Us</h1>
+                <p>Have questions or feedback? We'd love to hear from you!</p>
+            </div>
+        </section>
+
+        <div class="contact-container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+                    <p>Fill out the form or use the contact details below to reach us.</p>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>mandildissa11@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+94 71 317 1006</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Colombo, Sri Lanka</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Send Us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="new-footer-container">
+            <div class="new-footer-top">
+                <div class="new-footer-logo">
+                    <img src="favicon.png" alt="Horror Stories Logo">
+                    <h2>D11 Horror Stories</h2>
+                </div>
+                <div class="new-footer-newsletter">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get the latest horror stories delivered to your inbox.</p>
+                    <form class="new-subscribe-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="new-footer-columns">
+                <div class="new-footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="new-footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="new-social-links">
+                        <a href="https://www.facebook.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/yourchannelname" class="new-social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: mandildissa11@gmail.com</p>
+                    <p>Phone: +94 71 317 1006</p>
+                </div>
+            </div>
+            <div class="new-footer-bottom">
+                <p class="new-copyright">© 2025 D11 Horror Stories. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="fab" id="fab">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn-main');
+    const mobileMenuClose = document.getElementById('mobile-menu-close-main');
+    const mobileMenu = document.getElementById('mobile-menu-main');
+
+    // Mobile menu open button
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+    } else {
+        console.error('Mobile menu button not found!');
+    }
+
+    // Mobile menu close button
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    } else {
+        console.error('Mobile menu close button not found!');
+    }
+});
+
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+
+
+    setTimeout(function() {
+    document.getElementById('loader').style.display = 'none';
+}, 1000); // 1 seconds
+
+
+    // EmailJS පුස්තකාලය load වූ පසු මෙම function එක ක්‍රියාත්මක වේ
+    (function() {
+        // EmailJS Public Key එක මෙතැනට දමන්න
+        emailjs.init({
+            publicKey: "AhFQuargV4npsPVIk", // <<<--- මෙය ඔබගේ Public Key එකෙන් වෙනස් කරන්න
+        });
+    })();
+
+    // Form එක submit කරන event එක listen කරන්න
+    // 'contactForm' යනු ඔබේ form එකේ ID එකයි.
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Form එක සාමාන්‍ය විදිහට submit වීම නවත්වන්න
+
+        // EmailJS හරහා Email එක යවන්න
+        // 'YOUR_EMAILJS_SERVICE_ID' යනු ඔබගේ Service ID එකයි
+        // 'YOUR_EMAILJS_TEMPLATE_ID' යනු ඔබගේ Template ID එකයි
+        // this යනු submit වූ form එකයි, එහි ඇති දත්ත EmailJS වෙත යැවේ
+        emailjs.sendForm('service_axlneun', 'template_o2cxfke', this)
+            .then(function() {
+                console.log('SUCCESS!'); // Console එකේ successful ලෙස පෙන්වයි
+                alert('Your message has been sent successfully!'); // සාර්ථක වුවහොත් පරිශීලකයාට පණිවිඩයක් පෙන්වයි
+
+                // Optional: Form එක clear කිරීමට අවශ්‍ය නම් පහත line එකේ ඇති අදහස් දැක්වීම (//) ඉවත් කරන්න
+                // document.getElementById('contactForm').reset();
+
+            }, function(error) {
+                console.log('FAILED...', error); // Console එකේ error එක පෙන්වයි
+                alert('Failed to send message. Please try again.'); // අසාර්ථක වුවහොත් පරිශීලකයාට පණිවිඩයක් පෙන්වයි
+            });
+    });
+
+    // දැනටමත් ඔබේ ගොනුවේ ඇති අනෙකුත් script code මෙතැනින් පහළට තිබිය හැක.
+    // උදා: loader script එක
+    setTimeout(function() {
+        document.getElementById('loader').style.display = 'none';
+    }, 1000); // 1 seconds
+
+    // ඔබේ script.js ගොනුව link කර ඇත්නම්, එහි code ක්‍රියාත්මක වීමට ඉඩ හරින්න.
+    // 
+</script>
+</script>
+    <script src="script.js"></script>
+</body>
+</html>

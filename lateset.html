@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - Horror Stories</title> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Add / Update Styles for Dark Mode based on categories.html */
+        :root {
+            --primary-color-light: #d11d1d;
+            --secondary-color-light: #b31818;
+            --text-color-light: #333;
+            --bg-color-light: #f5f5f5;
+            --card-bg-light: white;
+            --accent-color-light: #d11d1d;
+            --dark-gray-light: #333;
+
+            --primary-color-dark: #ff4d4d;
+            --secondary-color-dark: #e63939;
+            --text-color-dark: #f5f5f5;
+            --bg-color-dark: #121212;
+            --card-bg-dark: #2d2d2d;
+            --dark-gray-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color-light); /* Use variable */
+            color: var(--text-color-light); /* Use variable */
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-color-dark); /* Use variable */
+            color: var(--text-color-dark); /* Use variable */
+        }
+
+        /* Loader Styles */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color-light); /* Use variable */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        body.dark-mode .loader-spinner {
+             border-top-color: var(--primary-color-dark); /* Use variable */
+        }
+
+        .loader-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #1a1a1a; /* Common */
+            color: white; /* Common */
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .navbar {
+             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white; /* Common */
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-items {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-items li {
+            margin-left: 20px;
+        }
+
+        .nav-items a {
+            color: white; /* Common */
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-items a:hover {
+            color: var(--primary-color-light); /* Use variable */
+        }
+        body.dark-mode .nav-items a:hover {
+            color: var(--primary-color-dark); /* Use variable */
+        }
+
+        .nav-items a.active {
+            color: var(--primary-color-light); /* Use variable */
+            font-weight: bold;
+        }
+        body.dark-mode .nav-items a.active {
+            color: var(--primary-color-dark); /* Use variable */
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white; /* Common */
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color-light); /* Use variable */
+            transform: rotate(30deg); /* Common */
+        }
+        body.dark-mode .theme-toggle:hover {
+            color: var(--primary-color-dark); /* Use variable */
+        }
+
+        .mobile-menu-btn {
+            display: none; /* Handled by media query */
+            background: none;
+            border: none;
+            color: white; /* Common */
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0; /* Start from left */
+            width: 100%; /* Full width on mobile */
+            max-width: 300px; /* Max width for slide-out effect */
+            height: 100%;
+            background-color: #1a1a1a; /* Common */
+            z-index: 1001;
+            transform: translateX(-100%); /* Hidden by default */
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        body.dark-mode .mobile-menu {
+            /* Dark Mode Mobile Menu adjustments if needed */
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0); /* Show menu when active */
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #333; /* Common border */
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: white; /* Common */
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-items li {
+            border-bottom: 1px solid #333; /* Common border */
+        }
+
+        .mobile-nav-items a {
+            display: block;
+            padding: 15px 20px;
+            color: white; /* Common */
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-nav-items a:hover {
+            background-color: #333; /* Common hover effect */
+        }
+
+        .mobile-nav-items a.active {
+            color: var(--primary-color-light); /* Use variable */
+            font-weight: bold;
+        }
+        body.dark-mode .mobile-nav-items a.active {
+            color: var(--primary-color-dark); /* Use variable */
+        }
+
+        .mobile-theme-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            color: white; /* Common */
+            cursor: pointer;
+            border-top: 1px solid #333; /* Common border */
+        }
+
+        .mobile-theme-toggle i {
+            font-size: 1.2rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding-top: 80px;
+            min-height: calc(100vh - 160px); /* Adjust based on footer height */
+        }
+
+        /* Removed Latest Stories Hero and Grid styles */
+
+        /* --- Team Members Section Styles (Improved) --- */
+        .team-section {
+            background-color: var(--bg-color-light); /* Light Mode Background */
+            padding: 60px 0;
+            text-align: center;
+            transition: background-color 0.3s ease;
+            position: relative; /* For potential background elements */
+        }
+        body.dark-mode .team-section {
+            background-color: var(--bg-color-dark); /* Dark Mode Background */
+        }
+
+        /* Optional: Add a subtle background pattern or overlay */
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Example pattern - replace with your image or pattern */
+            /* background-image: url('path/to/your/pattern.png'); */
+            /* background-size: cover; */
+            /* opacity: 0.1; */
+            z-index: 1; /* Place below content */
+            pointer-events: none; /* Allow clicks on content */
+        }
+
+
+        .team-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-color-light); /* Light Mode Heading */
+            transition: color 0.3s ease;
+            position: relative; /* Above background */
+            z-index: 2;
+        }
+         body.dark-mode .team-section h2 {
+            color: var(--primary-color-dark); /* Dark Mode Heading */
+        }
+
+
+        .team-members-list {
+            display: flex;
+            flex-direction: column; /* Stack members vertically */
+            align-items: center; /* Center members */
+            gap: 40px; /* Space between members */
+            max-width: 800px; /* Limit width */
+            margin: 0 auto; /* Center the list */
+            padding: 0 20px;
+            position: relative; /* Above background */
+            z-index: 2;
+        }
+
+        .team-member {
+            background-color: var(--card-bg-light); /* Light Mode Card */
+            padding: 30px;
+            border-radius: 12px; /* Slightly more rounded corners */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced Light Mode Shadow */
+            text-align: center; /* Center content within the card */
+            width: 100%; /* Take full width of the list container */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Added transform */
+            border: 2px solid var(--primary-color-light); /* More prominent Light Mode Border */
+            display: flex; /* Use flexbox for internal layout */
+            flex-direction: column; /* Stack photo, name, email */
+            align-items: center; /* Center items vertically within card */
+        }
+        body.dark-mode .team-member {
+             background-color: var(--card-bg-dark); /* Dark Mode Card */
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* Enhanced Dark Mode Shadow */
+             border-color: var(--primary-color-dark); /* More prominent Dark Mode Border */
+        }
+         /* Optional Hover Effect */
+        .team-member:hover {
+             transform: translateY(-8px); /* More pronounced lift effect */
+             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); /* Light Mode Hover Shadow */
+        }
+        body.dark-mode .team-member:hover {
+             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Dark Mode Hover Shadow */
+        }
+
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* Circular photo */
+            object-fit: cover; /* Crop photo */
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color-light); /* Thicker Light Mode Border */
+            transition: border-color 0.3s ease, transform 0.3s ease; /* Added transform */
+        }
+        body.dark-mode .member-photo {
+            border-color: var(--primary-color-dark); /* Thicker Dark Mode Border */
+        }
+        /* Optional Photo Hover Effect */
+        .team-member:hover .member-photo {
+             transform: scale(1.1); /* Slightly enlarge photo on card hover */
+        }
+
+
+        .member-name {
+            font-size: 1.6rem; /* Slightly larger name */
+            margin-bottom: 10px;
+            color: var(--text-color-light); /* Light Mode Name */
+            transition: color 0.3s ease;
+            font-weight: 600; /* Make name bolder */
+        }
+        body.dark-mode .member-name {
+             color: var(--text-color-dark); /* Dark Mode Name */
+        }
+
+
+        .member-email {
+            font-size: 1.1rem; /* Slightly larger email text */
+            color: #666; /* Light Mode Email - keep subtle */
+            text-decoration: none; /* Remove underline from email links */
+            transition: color 0.3s ease;
+        }
+         body.dark-mode .member-email {
+             color: #aaa; /* Dark Mode Email - keep subtle */
+         }
+         .member-email:hover {
+             text-decoration: underline; /* Add underline on hover */
+             color: var(--primary-color-light); /* Light Mode Hover */
+         }
+         body.dark-mode .member-email:hover {
+            color: var(--primary-color-dark); /* Dark Mode Hover */
+         }
+
+
+        /* Footer Styles (Existing) */
+        footer {
+            background-color: #1a1a1a; /* Common */
+            color: white; /* Common */
+            padding: 40px 0 20px;
+        }
+
+        body.dark-mode footer {
+             /* Dark Mode Footer adjustments if needed */
+        }
+
+
+        .new-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .new-footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .new-footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .new-footer-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .new-footer-logo h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .new-footer-newsletter h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .new-footer-newsletter p {
+            margin-bottom: 15px;
+            color: #aaa; /* Common */
+        }
+        body.dark-mode .new-footer-newsletter p {
+             /* Dark Mode Paragraph adjustments if needed */
+        }
+
+
+        .new-subscribe-form {
+            display: flex;
+        }
+
+        .new-subscribe-form input {
+            padding: 10px;
+            border: 1px solid #333; /* Common border */
+            border-radius: 5px 0 0 5px;
+            width: 250px;
+            font-size: 1rem;
+            background-color: white; /* Light Mode Input */
+            color: #333; /* Light Mode Input Text */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        body.dark-mode .new-subscribe-form input {
+            background-color: #121212; /* Dark Mode Input */
+            color: #f5f5f5; /* Dark Mode Input Text */
+            border-color: #555; /* Dark Mode Border */
+        }
+
+        .new-subscribe-form button {
+            padding: 10px 20px;
+            background-color: #d11d1d; /* Light Mode Button */
+            color: white; /* Common */
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .new-subscribe-form button:hover {
+            background-color: #b31818; /* Light Mode Hover */
+        }
+        body.dark-mode .new-subscribe-form button {
+            background-color: #ff4d4d; /* Dark Mode Button */
+        }
+        body.dark-mode .new-subscribe-form button:hover {
+             background-color: #e63939; /* Dark Mode Hover */
+        }
+
+
+        .new-footer-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .new-footer-column h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: #d11d1d; /* Light Mode Heading */
+            transition: color 0.3s ease;
+        }
+        body.dark-mode .new-footer-column h3 {
+            color: var(--primary-color-dark); /* Dark Mode Heading */
+        }
+
+
+        .new-footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .new-footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .new-footer-links a {
+            color: #aaa; /* Common */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .new-footer-links a:hover {
+            color: white; /* Common hover */
+        }
+
+        .new-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .new-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333; /* Common background */
+            color: white; /* Common color */
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .new-social-link:hover {
+            background-color: #d11d1d; /* Light Mode Hover */
+        }
+        body.dark-mode .new-social-link:hover {
+            background-color: var(--primary-color-dark); /* Dark Mode Hover */
+        }
+
+
+        .new-footer-bottom {
+            border-top: 1px solid #333; /* Common border */
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .new-copyright {
+            margin: 0;
+            color: #aaa; /* Common */
+            font-size: 0.9rem;
+        }
+
+        /* FAB (Floating Action Button) */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #d11d1d; /* Light Mode Button */
+            color: white; /* Common */
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: none; /* Handled by JS */
+            z-index: 99;
+        }
+
+        .fab:hover {
+            background-color: #b31818; /* Light Mode Hover */
+            transform: translateY(-5px); /* Common effect */
+        }
+
+        body.dark-mode .fab {
+            background-color: var(--primary-color-dark); /* Dark Mode Button */
+        }
+
+        body.dark-mode .fab:hover {
+            background-color: var(--secondary-color-dark); /* Dark Mode Hover */
+        }
+
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .latest-hero-content h1 { /* Kept this class for consistency if needed, though hero is removed */
+                font-size: 2.5rem;
+            }
+
+            .new-footer-top {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .new-footer-newsletter {
+                margin-top: 30px;
+                text-align: center;
+            }
+
+            .new-subscribe-form {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-items {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .latest-hero-content h1 { /* Kept this class for consistency */
+                font-size: 2rem;
+            }
+
+            .latest-hero-content p { /* Kept this class for consistency */
+                font-size: 1rem;
+            }
+
+            /* Removed latest-stories-grid responsive style */
+        }
+
+        @media (max-width: 576px) {
+            .latest-hero { /* Kept this class for consistency */
+                padding: 80px 0;
+            }
+
+            .new-subscribe-form input {
+                width: 200px;
+            }
+             /* Adjust Team Member width on small screens */
+            .team-member {
+                padding: 20px;
+            }
+            .member-photo {
+                 width: 100px;
+                 height: 100px;
+                 margin-bottom: 15px;
+                 border-width: 3px; /* Slightly thinner border on small screens */
+            }
+            .member-name {
+                 font-size: 1.3rem;
+                 margin-bottom: 8px;
+            }
+            .member-email {
+                 font-size: 0.9rem;
+            }
+             .team-members-list {
+                 gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <nav class="navbar" id="main-navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn-main">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-items">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="latest.html" class="active">Latest</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle-main">
+                        <i class="fas fa-moon"></i> </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-main">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-close" id="mobile-menu-close-main">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="latest.html" class="active">Latest</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-theme-toggle" id="mobile-theme-toggle-main">
+            <span>Dark Mode</span>
+            <i class="fas fa-moon"></i> </div>
+    </div>
+
+    <div class="main-content">
+        <section class="team-section">
+            <div class="container">
+                <h2>Meet Our Team</h2>
+                <div class="team-members-list">
+                    <div class="team-member">
+                        <img src="placeholder-photo1.jpg" alt="Team Member Photo 1" class="member-photo">
+                        <h3 class="member-name">Mandil Dissanayake</h3>
+                        <p><a href="mailto:mandildissa11@gmail.com" class="member-email">mandildissa11@gmail.com</a></p>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="placeholder-photo2.jpg" alt="Team Member Photo 2" class="member-photo">
+                        <h3 class="member-name">Second Team Member</h3>
+                        <p><a href="mailto:member2@example.com" class="member-email">member2@example.com</a></p>
+                    </div>
+
+                    <div class="team-member">
+                        <img src="placeholder-photo3.jpg" alt="Team Member Photo 3" class="member-photo">
+                        <h3 class="member-name">Third Team Member</h3>
+                        <p><a href="mailto:member3@example.com" class="member-email">member3@example.com</a></p>
+                    </div>
+
+                    </div>
+            </div>
+        </section>
+        </div>
+
+    <footer>
+        <div class="new-footer-container">
+            <div class="new-footer-top">
+                <div class="new-footer-logo">
+                    <img src="favicon.png" alt="Horror Stories Logo">
+                    <h2>D11 Horror Stories</h2>
+                </div>
+                <div class="new-footer-newsletter">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get the latest horror stories delivered to your inbox.</p>
+                    <form class="new-subscribe-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="new-footer-columns">
+                <div class="new-footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="new-footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="new-social-links">
+                        <a href="https://www.facebook.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/yourchannelname" class="new-social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: mandildissa11@gmail.com</p>
+                    <p>Phone: +94 71 317 1006</p>
+                </div>
+            </div>
+            <div class="new-footer-bottom">
+                <p class="new-copyright">© 2025 D11 Horror Stories. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="fab" id="fab">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn-main');
+            const mobileMenuClose = document.getElementById('mobile-menu-close-main');
+            const mobileMenu = document.getElementById('mobile-menu-main');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('active');
+                });
+            } else {
+                console.error('Mobile menu button not found!');
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            } else {
+                console.error('Mobile menu close button not found!');
+            }
+
+            // --- Dark Mode Toggle ---
+            const themeToggleBtnMain = document.getElementById('theme-toggle-main');
+            const themeToggleBtnMobile = document.getElementById('mobile-theme-toggle-main');
+            const body = document.body;
+            const darkModeClass = 'dark-mode';
+            const themeStorageKey = 'themePreference'; // Key for local storage
+
+            // Function to apply the saved theme
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add(darkModeClass);
+                    // Update icons
+                    if (themeToggleBtnMain) themeToggleBtnMain.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+                     if (themeToggleBtnMobile) { // Update text and icon for mobile toggle
+                        const mobileThemeToggleSpan = themeToggleBtnMobile.querySelector('span');
+                        mobileThemeToggleSpan.textContent = 'Light Mode';
+                        themeToggleBtnMobile.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+                    }
+                } else {
+                    body.classList.remove(darkModeClass);
+                     // Update icons
+                    if (themeToggleBtnMain) themeToggleBtnMain.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+                    if (themeToggleBtnMobile) { // Update text and icon for mobile toggle
+                        const mobileThemeToggleSpan = themeToggleBtnMobile.querySelector('span');
+                        mobileThemeToggleSpan.textContent = 'Dark Mode';
+                        themeToggleBtnMobile.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+                    }
+                }
+            }
+
+            // Load theme preference from local storage on page load
+            const savedTheme = localStorage.getItem(themeStorageKey);
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                 // Default to light mode if no preference is saved
+                 applyTheme('light');
+            }
+
+
+            // Add event listener for the main theme toggle button
+            if (themeToggleBtnMain) {
+                themeToggleBtnMain.addEventListener('click', () => {
+                    if (body.classList.contains(darkModeClass)) {
+                        applyTheme('light'); // Switch to light mode
+                        localStorage.setItem(themeStorageKey, 'light');
+                    } else {
+                        applyTheme('dark'); // Switch to dark mode
+                        localStorage.setItem(themeStorageKey, 'dark');
+                    }
+                });
+            } else {
+                console.error('Main theme toggle button not found!');
+            }
+
+            // Add event listener for the mobile theme toggle button
+            if (themeToggleBtnMobile) {
+                 mobileThemeToggleBtn.addEventListener('click', () => {
+                    if (body.classList.contains(darkModeClass)) {
+                        applyTheme('light'); // Switch to light mode
+                        localStorage.setItem(themeStorageKey, 'light');
+                    } else {
+                        applyTheme('dark'); // Switch to dark mode
+                        localStorage.setItem(themeStorageKey, 'dark');
+                    }
+                });
+            } else {
+                console.error('Mobile theme toggle container not found!');
+            }
+
+
+        }); // End DOMContentLoaded
+
+        // --- Loader Script ---
+        // Note: The loader script runs independently of DOMContentLoaded
+        setTimeout(function() {
+            const loader = document.getElementById('loader');
+             if(loader) {
+                loader.style.display = 'none';
+            } else {
+                console.error('Loader element not found!');
+            }
+        }, 1000); // 1 seconds
+
+
+        // --- Scroll-to-top FAB visibility ---
+        window.addEventListener('scroll', function() {
+            const fab = document.getElementById('fab');
+            if (fab) { // Check if FAB exists
+                 if (window.scrollY > 200) { // Show FAB after scrolling down 200px
+                    fab.classList.add('active');
+                } else {
+                    fab.classList.remove('active');
+                }
+            }
+        });
+
+        // Add click event to FAB to scroll to top
+        const fabButton = document.getElementById('fab');
+        if (fabButton) { // Check if FAB exists
+            fabButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+    </script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

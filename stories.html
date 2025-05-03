@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Stories - Horror Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <link rel="icon" type="image/png" href="favicon.png"> <style>
+        /* General Styles */
+:root {
+    --primary-color: #8b0000;
+    --secondary-color: #5c0000;
+    --text-color: #f0f0f0;
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #333;
+    --accent-color: #ff6b6b;
+    --light-text: #aaa;
+}
+
+.light-theme {
+    --primary-color: #c62828;
+    --secondary-color: #8e0000;
+    --text-color: #333;
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --border-color: #ddd;
+    --accent-color: #d32f2f;
+    --light-text: #666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Hidden by default */
+    width: 300px;
+    height: 100%;
+    background-color: var(--bg-color);
+    transition: right 0.3s ease;
+}
+
+.mobile-menu.active {
+    right: 0; /* Show menu when active */
+}
+
+/* Loader Styles */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loader-text {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Removed .logo-img styles */
+
+.nav-items {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-items li {
+    margin-left: 25px;
+}
+
+.nav-items a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-items a:hover {
+    color: var(--accent-color);
+}
+
+.nav-items a.active {
+    color: var(--accent-color);
+}
+
+.nav-items a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(30deg);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100%;
+    background-color: var(--bg-color);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-nav-items {
+    list-style: none;
+    padding: 20px;
+}
+
+.mobile-nav-items li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav-items a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-items a:hover {
+    color: var(--accent-color);
+}
+
+.mobile-nav-items a.active {
+    color: var(--accent-color);
+}
+
+.mobile-theme-toggle {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding-top: 80px;
+    min-height: calc(100vh - 160px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Stories Hero Section */
+.stories-hero {
+    /* Removed background image */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.stories-hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stories-hero-content p {
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+/* Filter Section */
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-weight: 500;
+}
+
+.filter-group select {
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    min-width: 200px;
+}
+
+/* Stories Grid */
+.all-stories-grid {
+    display: grid;
+    /* Adjusted minmax for smaller card size */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.story-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    cursor: pointer; /* Keep cursor pointer as the card is clickable */
+}
+
+.story-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Removed .story-card-img styles */
+
+.story-card-content {
+    padding: 15px; /* Reduced padding */
+}
+
+.story-card-category {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.story-card-title {
+    font-size: 1.2rem; /* Slightly smaller title */
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.story-card-excerpt {
+    color: var(--light-text);
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 0.9rem; /* Slightly smaller excerpt text */
+}
+
+.story-card-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+.story-card-read {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.story-card-read:hover {
+    color: var(--primary-color);
+}
+
+/* Story Page Styles */
+.story-page {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    /* Adjusted padding-top to account for the fixed header */
+    padding-top: 400px; /* Default padding-top for larger screens */
+}
+
+.story-page.active {
+    opacity: 1;
+}
+
+.story-header {
+    position: fixed; /* Changed to fixed */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px; /* Keep height for larger screens */
+    overflow: hidden;
+    z-index: 1001; /* Ensure header is above the story content */
+    background-color: var(--bg-color); /* Add background color for fixed header */
+}
+
+.story-header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Removed background-image styles */
+    background-color: var(--secondary-color); /* Optional: Add a background color instead of image */
+    filter: brightness(0.6);
+}
+
+.story-header-content {
+    position: relative;
+    z-index: 1;
+    padding: 40px;
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    /* Adjusted position and z-index for visibility */
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1002; /* Ensure button is above overlay */
+}
+
+.back-btn:hover {
+    color: var(--accent-color);
+}
+
+.story-header-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.story-meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.story-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Removed .story-author-img styles */
+
+.story-author-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.story-date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.story-category {
+    padding: 6px 12px;
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.story-body {
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.story-body p {
+    margin-bottom: 20px;
+}
+
+/* Removed .story-body img styles */
+
+/* Load More Button */
+.load-more-container {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.load-more-btn {
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.load-more-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 40px 0 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.new-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.new-footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.new-footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Hidden by default */
+    width: 300px;
+    height: 100%;
+    background-color: var(--bg-color);
+    transition: right 0.3s ease;
+}
+
+.mobile-menu.active {
+    right: 0; /* Show menu when active */
+}
+
+/* Removed .new-footer-logo img styles */
+
+.new-footer-logo h2 {
+    font-size: 1.5rem;
+}
+
+.new-footer-newsletter h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.new-footer-newsletter p {
+    margin-bottom: 15px;
+    color: var(--light-text);
+}
+
+.new-subscribe-form {
+    display: flex;
+    gap: 10px;
+}
+
+.new-subscribe-form input {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    flex: 1;
+    min-width: 200px;
+}
+
+.new-subscribe-form button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.new-subscribe-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.new-footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.new-footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.new-footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.new-footer-links {
+    list-style: none;
+}
+
+.new-footer-links li {
+    margin-bottom: 10px;
+}
+
+.new-footer-links a {
+    text-decoration: none;
+    color: var(--light-text);
+    transition: color 0.3s ease;
+}
+
+.new-footer-links a:hover {
+    color: var(--accent-color);
+}
+
+.new-social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.new-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.new-social-link:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.new-footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.new-copyright {
+    color: var(--light-text);
+    font-size: 0.9rem;
+}
+
+/* FAB Button */
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.fab.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fab:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .nav-items {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .stories-hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .stories-hero-content p {
+        font-size: 1rem;
+    }
+
+    .filter-section {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group select {
+        width: 100%;
+    }
+
+    .story-header {
+        height: 220px; /* Adjusted header height for smaller screens */
+    }
+
+     .story-page {
+        /* Adjusted padding-top to match reduced header height */
+        padding-top: 220px;
+     }
+
+
+    .story-header-content {
+        padding: 15px; /* Adjusted padding */
+        justify-content: flex-start; /* Align content to top */
+        padding-top: 50px; /* Add padding at the top to make space for back button */
+    }
+
+     .back-btn {
+        top: 15px; /* Position back button from the top of the fixed header */
+        left: 15px;
+        font-size: 1rem; /* Slightly smaller font size */
+     }
+
+
+    .story-header-content h1 {
+        font-size: 1.6rem; /* Adjusted title font size */
+        margin-bottom: 10px; /* Adjusted margin */
+    }
+
+    .story-meta-header {
+        flex-direction: column; /* Stack meta items on small screens */
+        align-items: flex-start;
+        margin-bottom: 10px; /* Adjusted margin */
+    }
+
+    .story-author {
+        margin-bottom: 10px; /* Add space below author */
+    }
+
+
+    .story-body {
+        padding: 20px;
+    }
+
+    .new-footer-top {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .new-subscribe-form {
+        flex-direction: column;
+    }
+
+    .new-footer-column {
+        text-align: center;
+    }
+
+    .new-footer-column h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .new-social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .all-stories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stories-hero {
+        height: 180px;
+    }
+
+    .story-header {
+        height: 200px; /* Further reduced header height for very small screens */
+    }
+
+     .story-page {
+        /* Adjusted padding-top */
+        padding-top: 200px;
+     }
+
+    .story-header-content {
+        padding: 10px; /* Further reduced padding */
+        padding-top: 45px; /* Adjust padding-top */
+    }
+
+     .back-btn {
+        top: 10px; /* Adjust position */
+        left: 10px;
+        font-size: 0.9rem; /* Further reduced font size */
+     }
+
+    .story-header-content h1 {
+        font-size: 1.4rem; /* Further adjusted title font size */
+    }
+
+    .story-body {
+        padding: 15px; /* Further reduced padding */
+    }
+}
+    </style>
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <nav class="navbar" id="main-navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn-main">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-items">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stories.html" class="active">Stories</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="latest.html">Latest</a></li>
+                <li><a href="contacts.html">Contact Us</a></li>
+                <li>
+                    <button class="theme-toggle" id="theme-toggle-main">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-main">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-close" id="mobile-menu-close-main">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="stories.html" class="active">Stories</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="latest.html">Latest</a></li>
+            <li><a href="contacts.html">Contact Us</a></li>
+        </ul>
+        <div class="mobile-theme-toggle" id="mobile-theme-toggle-main">
+            <span>Dark Mode</span>
+            <i class="fas fa-moon"></i>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <section class="stories-hero">
+            <div class="stories-hero-content">
+                <h1>හොල්මන් ලෝකය 👻 </h1>
+                <p>Browse our complete collection of terrifying tales</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="category-filter">Filter by Category:</label>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="ghosts">Ghost Stories</option>
+                        <option value="demons">Demon Stories</option>
+                        <option value="urban-legends">Urban Legends</option>
+                        <option value="true-stories">True Stories</option>
+                        <option value="psychological">Psychological Horror</option>
+                        <option value="supernatural">Supernatural</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort-by">Sort By:</label>
+                    <select id="sort-by">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="all-stories-grid">
+                </div>
+
+            <div class="load-more-container">
+                <button class="load-more-btn" id="load-more-btn">
+                    Load More Stories
+                    <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="story-page" id="story-page">
+        <div class="story-header">
+            <div class="story-header-overlay" id="story-header-image"></div>
+            <div class="story-header-content">
+                <a href="#" class="back-btn" id="back-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back
+                </a>
+                <h1 id="story-page-title">Story Title</h1>
+                <div class="story-meta-header">
+                    <div class="story-author">
+                        <div>
+                            <div class="story-author-name" id="story-page-author">Author</div>
+                            <div class="story-date" id="story-page-date">Date</div>
+                        </div>
+                    </div>
+                    <div class="story-category" id="story-page-category">Category</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="story-body" id="story-page-body">
+            </div>
+    </div>
+
+    <footer>
+        <div class="new-footer-container">
+            <div class="new-footer-top">
+                <div class="new-footer-logo">
+                    <h2>D11 Horror Stories</h2>
+                </div>
+                <div class="new-footer-newsletter">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get the latest horror stories delivered to your inbox.</p>
+                    <form class="new-subscribe-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="new-footer-columns">
+                <div class="new-footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="new-footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="new-social-links">
+                        <a href="https://www.facebook.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/yourchannelname" class="new-social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: mandildissa11@gmail.com</p>
+                    <p>Phone: +94 71 317 1006</p>
+                </div>
+            </div>
+            <div class="new-footer-bottom">
+                <p class="new-copyright">© 2025 D11 Horror Stories. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="fab" id="fab">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+<script>
+    // Sample stories data (Images removed from data)
+
+
+    // DOM elements
+    const loader = document.getElementById('loader');
+    const themeToggle = document.getElementById('theme-toggle-main');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle-main');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn-main');
+    const mobileMenuClose = document.getElementById('mobile-menu-close-main');
+    const mobileMenu = document.getElementById('mobile-menu-main');
+    const storiesGrid = document.querySelector('.all-stories-grid');
+    const categoryFilter = document.getElementById('category-filter');
+    const sortBy = document.getElementById('sort-by');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const storyPage = document.getElementById('story-page');
+    const backBtn = document.getElementById('back-btn');
+    const fab = document.getElementById('fab');
+    const mainContent = document.querySelector('.main-content'); // Get the main content wrapper
+
+    // Elements within the story page
+    const storyPageTitle = document.getElementById('story-page-title');
+    const storyPageAuthor = document.getElementById('story-page-author');
+    const storyPageDate = document.getElementById('story-page-date');
+    const storyPageCategory = document.getElementById('story-page-category');
+    const storyPageBody = document.getElementById('story-page-body');
+    const storyHeaderImage = document.getElementById('story-header-image'); // Use this for background color/overlay
+
+
+    // Variables
+    let visibleStories = 4;
+    let currentTheme = 'dark';
+    let lastScrollPosition = 0; // Variable to store scroll position
+
+    // Initialize the page
+    function init() {
+        console.log("Initializing page..."); // Debugging log
+        // Hide loader after 1.5 seconds
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        }, 1500);
+
+        // Load stories
+        displayStories();
+
+        // Event listeners
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        categoryFilter.addEventListener('change', displayStories);
+        sortBy.addEventListener('change', displayStories);
+        loadMoreBtn.addEventListener('click', loadMoreStories);
+
+        // --- Back Button Event Listener ---
+        if (backBtn) {
+            backBtn.addEventListener('click', (e) => {
+                console.log("Back button clicked!"); // Debugging log
+                e.preventDefault(); // Prevent default link behavior
+                hideStoryPage();    // Call the function to hide the story page
+            });
+        } else {
+            console.error("Back button element not found!"); // Debugging log
+        }
+        // --- End Back Button Event Listener ---
+
+        window.addEventListener('scroll', toggleFabVisibility);
+
+        // Add event listeners to story cards after they are displayed
+        // This is handled inside displayStories and createStoryCard functions
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            currentTheme = savedTheme;
+            document.body.classList.toggle('light-theme', currentTheme === 'light');
+            updateThemeIcons();
+        }
+        console.log("Initialization complete."); // Debugging log
+    }
+
+    // Display stories based on filters
+    function displayStories() {
+        console.log("Displaying stories..."); // Debugging log
+        storiesGrid.innerHTML = '';
+        visibleStories = 4;
+
+        const category = categoryFilter.value;
+        const sortMethod = sortBy.value;
+
+        let filteredStories = [...stories];
+
+        // Filter by category
+        if (category !== 'all') {
+            filteredStories = filteredStories.filter(story => story.category === category);
+        }
+
+        // Sort stories
+        switch (sortMethod) {
+            case 'newest':
+                filteredStories.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+            case 'oldest':
+                filteredStories.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case 'popular':
+                filteredStories.sort((a, b) => b.reads - a.reads);
+                break;
+        }
+
+        // Display initial set of stories
+        const storiesToShow = filteredStories.slice(0, visibleStories);
+        storiesToShow.forEach(story => {
+            createStoryCard(story);
+        });
+
+        // Show/hide load more button
+        loadMoreBtn.style.display = filteredStories.length > visibleStories ? 'inline-flex' : 'none';
+        console.log("Stories displayed."); // Debugging log
+    }
+
+    // Create story card element - Modified to be clickable and open the story page section
+    function createStoryCard(story) {
+        const storyCard = document.createElement('div');
+        storyCard.className = 'story-card';
+        storyCard.setAttribute('data-story-id', story.id); // Add data-story-id
+
+        storyCard.innerHTML = `
+            <div class="story-card-content">
+                <span class="story-card-category">${formatCategory(story.category)}</span>
+                <h3 class="story-card-title">${story.title}</h3>
+                <p class="story-card-excerpt">${story.excerpt}</p>
+                <div class="story-card-meta">
+                    <span>${formatDate(story.date)} • ${story.reads.toLocaleString()} reads</span>
+                    <a href="#" class="story-card-read" data-id="${story.id}">Read Story</a>
+                </div>
+            </div>
+        `;
+        storiesGrid.appendChild(storyCard);
+
+        // Add click event listener to the story card
+        storyCard.addEventListener('click', () => {
+            const storyId = storyCard.getAttribute('data-story-id');
+            openStoryPage(parseInt(storyId)); // Call openStoryPage with the story ID
+        });
+
+        // Prevent the default link behavior for "Read Story" link inside the card
+        // so the click on the card itself handles the opening
+        const readStoryLink = storyCard.querySelector('.story-card-read');
+        if (readStoryLink) {
+            readStoryLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const storyId = e.target.getAttribute('data-id');
+                openStoryPage(parseInt(storyId)); // Call openStoryPage
+            });
+        }
+    }
+
+    // Load more stories
+    function loadMoreStories() {
+        console.log("Loading more stories..."); // Debugging log
+        const category = categoryFilter.value;
+        const sortMethod = sortBy.value;
+
+        let filteredStories = [...stories];
+
+        // Filter by category
+        if (category !== 'all') {
+            filteredStories = filteredStories.filter(story => story.category === category);
+        }
+
+        // Sort stories
+        switch (sortMethod) {
+            case 'newest':
+                filteredStories.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+            case 'oldest':
+                filteredStories.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case 'popular':
+                filteredStories.sort((a, b) => b.reads - a.reads);
+                break;
+        }
+
+        // Increase visible stories count
+        visibleStories += 4;
+
+        // Display additional stories
+        const storiesToShow = filteredStories.slice(0, visibleStories);
+        storiesGrid.innerHTML = '';
+        storiesToShow.forEach(story => {
+            createStoryCard(story);
+        });
+
+        // Show/hide load more button
+        loadMoreBtn.style.display = filteredStories.length > visibleStories ? 'inline-flex' : 'none';
+        console.log("More stories loaded."); // Debugging log
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn-main');
+    const mobileMenuClose = document.getElementById('mobile-menu-close-main');
+    const mobileMenu = document.getElementById('mobile-menu-main');
+
+    // Mobile menu open button
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+    } else {
+        console.error('Mobile menu button not found!');
+    }
+
+    // Mobile menu close button
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    } else {
+        console.error('Mobile menu close button not found!');
+    }
+});
+
+    // Open story page (display the story in the story-page section)
+    function openStoryPage(storyId) {
+        console.log("Opening story page for ID:", storyId); // Debugging log
+        const story = stories.find(s => s.id === storyId);
+        if (!story) {
+            console.error("Story not found for ID:", storyId); // Debugging log
+            return;
+        }
+
+        // Save current scroll position before opening story page
+        lastScrollPosition = window.scrollY;
+        console.log("Saved scroll position:", lastScrollPosition); // Debugging log
+
+
+        // Update story page content
+        storyPageTitle.textContent = story.title;
+        storyPageAuthor.textContent = story.author;
+        // Removed setting author image
+        storyPageDate.textContent = formatDate(story.date);
+        storyPageCategory.textContent = formatCategory(story.category);
+        storyPageBody.innerHTML = story.content;
+        // Removed setting header background image
+        storyHeaderImage.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // Set a background color for the overlay
+
+        // Hide main content and show story page
+        mainContent.style.display = 'none'; // Hide main content
+        storyPage.style.display = 'block'; // Show story page
+
+        setTimeout(() => {
+            storyPage.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling of the main page
+        }, 10);
+
+        // Scroll to top of story page
+        storyPage.scrollTo(0, 0); // Scroll the story page div, not the window
+        console.log("Story page opened."); // Debugging log
+    }
+
+    // Close story page
+    function hideStoryPage() {
+        console.log("Attempting to hide story page..."); // Debugging log
+        // Hide story page
+        storyPage.classList.remove('active');
+        storyPage.style.display = 'none'; // Ensure it's hidden
+
+        // Show main content
+        mainContent.style.display = 'block'; // Show main content
+
+        // Restore body scrolling
+        document.body.style.overflow = '';
+
+        // Restore scroll position
+        window.scrollTo(0, lastScrollPosition);
+        console.log("Story page hidden, main content shown, scroll position restored."); // Debugging log
+    }
+
+
+    // Toggle theme between dark and light
+    function toggleTheme() {
+        console.log("Toggling theme."); // Debugging log
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.body.classList.toggle('light-theme');
+        localStorage.setItem('theme', currentTheme);
+        updateThemeIcons();
+        console.log("Theme toggled to:", currentTheme); // Debugging log
+    }
+
+    // Update theme toggle icons
+    function updateThemeIcons() {
+        const icon = currentTheme === 'dark' ? 'fa-moon' : 'fa-sun';
+        if (themeToggle) {
+            themeToggle.innerHTML = `<i class="fas ${icon}"></i>`;
+        }
+        if (mobileThemeToggle) {
+             mobileThemeToggle.innerHTML = `
+                <span>${currentTheme === 'dark' ? 'Dark' : 'Light'} Mode</span>
+                <i class="fas ${icon}"></i>
+            `;
+        }
+    }
+
+    // Toggle FAB visibility based on scroll position
+    function toggleFabVisibility() {
+        // Check scroll position of the body, not the storyPage
+        if (window.scrollY > 300) {
+            fab.classList.add('visible');
+        } else {
+            fab.classList.remove('visible');
+        }
+    }
+
+    // Scroll to top when FAB is clicked
+    if (fab) {
+        fab.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+
+    // Format category for display
+    function formatCategory(category) {
+        return category.split('-').map(word =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+    }
+
+    // Format date for display
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+
+    // Initialize the page when DOM is loaded
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+
+<script src="sscript.js"></script>
+
+</body>
+</html>

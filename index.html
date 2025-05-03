@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horror stories</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
+
+    <div class="whatsapp-notification" id="whatsapp-notification">
+        <div class="whatsapp-notification-header">
+            <div class="whatsapp-notification-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="whatsapp-notification-title">අපගේ WhatsApp නාලිකාව</div>
+        </div>
+        <div class="whatsapp-notification-message">
+            අපගේ නවතම භීතිකා කථා ලබා ගැනීමට අපගේ WhatsApp නාලිකාවට සම්බන්ධ වන්න!
+        </div>
+        <div class="whatsapp-notification-buttons">
+            <button class="whatsapp-notification-button join" id="whatsapp-join">
+                සම්බන්ධ වන්න
+            </button>
+            <button class="whatsapp-notification-button dismiss" id="whatsapp-dismiss">
+                නැත, තවදුරටත් නොකරන්න
+            </button>
+        </div>
+    </div>
+
+    <nav class="navbar" id="main-navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn-main">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-items">
+                <li><a href="index.html" data-target="hero">Home</a></li>
+                <li><a href="stories.html" data-target="stories">Stories</a></li>
+                <li><a href="categories.html" data-target="categories">Categories</a></li>
+                <li><a href="lateset.html" data-target="latest">Latest</a></li>
+                <li><a href="contacts.html" data-target="contact">Contact Us</a></li> <li>
+                    <button class="theme-toggle" id="theme-toggle-main">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-main">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">
+                <img src="favicon.png" alt="Horror Stories Logo" class="logo-img">
+                Horror Stories
+            </a>
+            <button class="mobile-menu-close" id="mobile-menu-close-main">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="mobile-nav-items">
+            <li><a href="#" data-target="hero">Home</a></li>
+            <li><a href="stories.html" data-target="stories">Stories</a></li>
+            <li><a href="categories.html" data-target="categories">Categories</a></li>
+            <li><a href="lateset.html" data-target="latest">Latest</a></li>
+            <li><a href="contacts.html" data-target="contact">Contact Us</a></li>
+        </ul>
+        <div class="mobile-theme-toggle" id="mobile-theme-toggle-main">
+            <span>Dark Mode</span>
+            <i class="fas fa-moon"></i>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <section class="hero" id="hero"> <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Welcome To The World Of Horror Stories</h1>
+                <p>වඩාත්ම භයානක හා රහස්මය කථා එකතුවකට සම්බන්ධ වන්න. රාත්‍රිය පුරා ඔබව අවදි කර තබන කථා සොයා ගන්න.</p>
+                <a href="#stories" class="hero-btn" data-target="stories">Read Stories</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="section-title" id="stories">
+                <h2>Famous stories Of This Week</h2>
+            </div>
+
+            <div class="stories-grid">
+                <div class="story-card" data-story-id="1">
+                    <div class="story-image">
+                        <img src="Jems.jpeg" alt="Story Image">
+                        <div class="story-category">Popular</div>
+                    </div>
+                    <div class="story-content">
+                        <h3 class="story-title">𝗦𝗹𝗼𝘀𝘀 𝗙𝘂𝗿𝗻𝗮𝗰𝗲𝘀 (𝗝𝗮𝗺𝗲𝘀 𝗦𝗹𝗮𝗴)</h3>
+                        <p class="story-excerpt">ඇමරිකාව අද වෙනකොට දියුනු රටක් වශයෙන් ලොකයම දකිනව ඉතින් මෙ දියුනු රටට ඉතිහාසය කියල තියෙන්නෙ වසර 300ක් පමණ ඉතිහාසයක් පමණයිඇමරිකාවෙ සිවිල් යුද්දෙයන් පසුව එනම් 1871 වර්ශයේ පමණ ඇලබාමා වල ඉදි වෙනව යපස් වලින් යකඩ නිශ්පාදනය කරන කර්මාන්ත ශාලාවක්.මේ ඉඳි කිරීම ඇමරිකාවෙ ආරම්බ වූ පලමු කර්මාන්ත ශාලා වලින් එකක් බවට අද පත් වෙලා තියනව...</p>
+                        <div class="story-meta">
+                            <div class="story-author">
+                                <img src="unknown.png" alt="Author" class="story-author-img">
+                                <span>Unknown Writer</span>
+                            </div>
+                            <div class="story-date">April 26, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card" data-story-id="2">
+                    <div class="story-image">
+                        <img src="Ath.jpeg" alt="Story Image">
+                        <div class="story-category">Popular</div>
+                    </div>
+                    <div class="story-content">
+                        <h3 class="story-title">ඈන්ලිස් මිෂෙල්</h3>
+                        <p class="story-excerpt">ජර්මනියේ නිහඬ බවාරියානු ගම්මානයක, 1952 සැප්තැම්බර් 21 වන දින උපත ලැබූ ඈන්ලිස් මිෂෙල් (Anneliese Michel)නම් තරුණියගේ ජීවිතය අඳුරු සෙවනැල්ලකින් වැසී ගියේය. සාමාන්‍ය තරුණියකගේ සතුටු සිතුවිලි වෙනුවට ඇය මුහුණ දුන්නේ පැහැදිලි කළ නොහැකි අත්දැකීම්වලටය.1976 ජූලි 1 වන දින, ඇයගේ තරුණ ජීවිතය හදිසියේම නිමාවට පත් වූයේ බොහෝ දෙනා මවිතයට පත් කරමිනි. ඇගේ මරණය වටා ගෙතී ඇති අභිරහස...</p>
+                        <div class="story-meta">
+                            <div class="story-author">
+                                <img src="unknown.png" alt="Author" class="story-author-img">
+                                <span>Unknown Writer</span>
+                            </div>
+                            <div class="story-date">April 26, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card" data-story-id="3">
+                    <div class="story-image">
+                        <img src="Luis.jpeg" alt="Story Image">
+                        <div class="story-category">Popular</div>
+                    </div>
+                    <div class="story-content">
+                        <h3 class="story-title">සැන් ලුයිස් නිම්නය</h3>
+                        <p class="story-excerpt">මේක පිහිටලා තියෙන්නේ ඇමරිකා එක්සත් ජනපදයේ කොලරාඩෝ ප්‍රාන්තයේ.මේකෙ සමහර කොටස් නිව්මෙක්සිකෝ ප්‍රාන්තය දක්වා විහිදී තියෙනවාමෙහි සංචාරය කළ සමහර අයට අත්භූත සිද්ධිවලට මුහුණ පාන්න වෙලා තියෙනවාමේ නිම්නය වටේ ගෙතිලා තියෙන ප්‍රධානම කතාවක් තමයි මෙහි පිටසක්වල ජීවීන් සැරිසරන බව.මෙහිදී නිවෙස්වල ඇති කරන සුරතල් සතුන් අතුරුදන් වීම් වාර්තා වී ඇති අතර,ඔවුන්ගේ හමුවුණු...</p>
+                        <div class="story-meta">
+                            <div class="story-author">
+                                <img src="mandil.png" alt="Author" class="story-author-img">
+                                <span>Mandil Dissanayake</span>
+                            </div>
+                            <div class="story-date">April 15, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card" data-story-id="4">
+                    <div class="story-image">
+                        <img src="horrorgift.png" alt="Story Image">
+                        <div class="story-category">Popular</div>
+                    </div>
+                    <div class="story-content">
+                        <h3 class="story-title">අපූරු පරිත්‍යාගය</h3>
+                        <p class="story-excerpt">මාලි නුවර උපන් කුමාර නම් තරුණයා කුඩා කල සිටම අසරණයන්ට උදව් කිරීමට කැමති වූවා. ඔහු වයස අවුරුදු 25 වන විට, කොළඹ ප්‍රදේශයේ සාර්ථක ව්‍යාපාරිකයෙක් බවට පත්වුණා. එහෙත් ඔහුගේ සිතේ තිබූ පරෝපකාරී හැඟීම කිසි දිනෙක නැති වූයේ නැහැ.එක් දිනක, ඔහු පාරේ ගමන් කරමින් සිටියදී, මාර්ග අසල වෙහෙස මහන්සි වී බඩු විකුණන වයසක කාන්තාවක් දුටුවා. එම කාන්තාව අසරණ තත්ත්වයක පසුවන බව කුමාරට වැටහුණා....</p>
+                        <div class="story-meta">
+                            <div class="story-author">
+                                <img src="mandil.png" alt="Author" class="story-author-img">
+                                <span>Mandil Dissanayake</span>
+                            </div>
+                            <div class="story-date">March 3, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card" data-story-id="5">
+                    <div class="story-image">
+                        <img src="Balangoda.png" alt="Story Image">
+                        <div class="story-category">Popular</div>
+                    </div>
+                    <div class="story-content">
+                        <h3 class="story-title">බලංගොඩ මනුෂ්‍යයා <br> (ශ්‍රී ලංකාවේ සැබෑ හොල්මන් කතාවක්)</h3>
+                        <p class="story-excerpt">ශ්‍රී ලංකාවේ බලංගොඩ ප්‍රදේශයේ 1950 දශකයේ සිට වාර්තා වී ඇති "බලංගොඩ මනුෂ්‍යයා" හෙවත් "බලංගොඩ මානවයා" නමින් හැඳින්වෙන අභිරහස්මය සත්ත්වයා පිළිබඳ සැබෑ සිදුවීම් මාලාවක් මෙහි විස්තර කෙරේ.1954 වසරේ බලංගොඩ ප්‍රදේශයේ පදිංචි ගොවි මහතෙකු වූ අල්බට් සමරකෝන් මහතා රාත්‍රී කාලයේ තම ගොවිබිමෙහි වැඩ කරමින් සිටියදී....</p>
+                        <div class="story-meta">
+                            <div class="story-author">
+                                <img src="mandil.png" alt="Author" class="story-author-img">
+                                <span>Mandil Dissanayake</span>
+                            </div>
+                            <div class="story-date">March 3, 2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card" data-story-id="6">
+                    <div class="story-image">
+                        <img src="Matale.png" alt="Story Image">
+                        <div class="story-category">Popular</div>
+                    </div>
+                    <div class="story-content">
+                        <h3 class="story-title">මාතලේ කළු කුමාරයා <br> ( ශ්‍රී ලංකාවේ සැබෑ හොල්මන් කතාවක් )</h3>
+                        <p class="story-excerpt">1965 වසරේදී, මාතලේ නගරයට ආසන්න පල්ලේගම නම් ගම්මානයේ පදිංචි පවුලක් රාත්‍රී කාලයේ තම නිවසේ අරුම පුදුම සිදුවීම් ගණනාවක් අත්විඳින්නට පටන් ගත්තා. ඒ පවුලේ පදිංචිව සිටි පේමවතී නම් කාන්තාව පැවසුවේ රාත්‍රී කාලයේ නිවසේ දොරවල් සහ ජනෙල් සියල්ල වසා තිබියදීත්, කිසියම් කළු පැහැති සෙවනැල්ලක් මෙන් හැඩයක් නිවස තුළ දකින්නට ලැබුණු බවයි...</p>
+                        <div class="story-meta">
+                            <div class="story-author">
+                                <img src="mandil.png" alt="Author" class="story-author-img">
+                                <span>Mandil Dissanayake</span>
+                            </div>
+                            <div class="story-date">March 3, 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div> <div class="story-page" id="story-page">
+         <div class="story-header">
+            <div class="story-header-overlay" id="story-header-image"></div>
+            <div class="story-header-content">
+                <a href="#" class="back-btn" id="back-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back
+                </a> <h1 id="story-page-title">කථාවේ නම</h1>
+                <div class="story-meta-header">
+                    <div class="story-author">
+                        <img src="" alt="Author" class="story-author-img" id="story-page-author-img">
+                        <div>
+                            <div class="story-author-name" id="story-page-author">Author</div>
+                            <div class="story-date" id="story-page-date">Date</div>
+                        </div>
+                    </div>
+                    <div class="story-category" id="story-page-category">Category</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="story-body" id="story-page-body">
+            </div>
+    </div>
+
+
+    <footer>
+        <div class="new-footer-container">
+            <div class="new-footer-top">
+                <div class="new-footer-logo">
+                    <img src="favicon.png" alt="Horror Stories Logo">
+                    <h2>05 Horror Stories</h2>
+                </div>
+                <div class="new-footer-newsletter">
+                    <h3>Subscribe to our Newsletter</h3>
+                    <p>Get the latest horror stories delivered to your inbox.</p>
+                    <form class="new-subscribe-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="new-footer-columns">
+                <div class="new-footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="new-footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#stories">Stories</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="new-social-links">
+                        <a href="https://www.facebook.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/yourpage" class="new-social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/yourchannelname" class="new-social-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="new-footer-column">
+                    <h3>Contact Us</h3>
+                    <p>Email: mandildissa11@gmail.com</p>
+                    <p>Phone: +94 71 317 1006</p>
+                </div>
+            </div>
+            <div class="new-footer-bottom">
+                <p class="new-copyright">© 2025 D11 Horror Stories. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="fab" id="fab">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Move this part to script.js for better organization if you haven't already
+        // All your JavaScript code should ideally be in script.js
+        // However, if you prefer to keep it here, ensure it's within a single script block.
+        // ... (Your existing script content goes here, with modifications below) ...
+
+         // DOM Elements
+        const mobileMenuBtnMain = document.getElementById('mobile-menu-btn-main'); // Unique ID for main menu button
+        const mobileMenuCloseMain = document.getElementById('mobile-menu-close-main'); // Unique ID for main menu close
+        const mobileMenuMain = document.getElementById('mobile-menu-main'); // Unique ID for main mobile menu
+        const mobileThemeToggleMain = document.getElementById('mobile-theme-toggle-main'); // Unique ID for main theme toggle
+        const themeToggleMain = document.getElementById('theme-toggle-main'); // Unique ID for main theme toggle
+        const storyCards = document.querySelectorAll('.story-card');
+        const storyPage = document.getElementById('story-page');
+        const backBtn = document.getElementById('back-btn');
+        const storyPageTitle = document.getElementById('story-page-title');
+        const storyPageAuthor = document.getElementById('story-page-author');
+        const storyPageAuthorImg = document.getElementById('story-page-author-img');
+        const storyPageDate = document.getElementById('story-page-date');
+        const storyPageCategory = document.getElementById('story-page-category');
+        const storyPageBody = document.getElementById('story-page-body');
+        const storyHeaderImage = document.getElementById('story-header-image');
+        const fab = document.getElementById('fab');
+        const loader = document.getElementById('loader');
+        const mainContent = document.querySelector('.main-content'); // Get the main content wrapper
+
+        // Select all navigation links (in both navbars, although there's only one now)
+        const navLinks = document.querySelectorAll('.nav-items a, .mobile-nav-items a');
+
+        // Get the Read Stories button
+        const heroBtn = document.querySelector('.hero-btn');
+
+
+        // Theme Toggle
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+             // Update mobile theme toggle text after toggling
+             updateMobileThemeText();
+        }
+
+         // Update theme icon based on current theme
+        function updateThemeIcon(theme) {
+            // Update icon for the main theme toggle
+            if (themeToggleMain) {
+                themeToggleMain.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
+            // If you had a separate theme toggle on the story page, update it here too
+        }
+
+         // Update mobile theme toggle text based on current theme
+         function updateMobileThemeText() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const text = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode'; // Or use Sinhala text
+            const iconClass = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+            if (mobileThemeToggleMain) {
+                 mobileThemeToggleMain.innerHTML = `<span><span class="math-inline">\{text\}</span\><i class\="</span>{iconClass}"></i>`;
+            }
+             // If you had a separate mobile theme toggle on the story page, update it here too
+        }
+
+
+        // Check for saved theme preference and initialize
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            updateMobileThemeText(); // Initial text update
+        }
+
+
+        // Toggle mobile menu
+        mobileMenuBtnMain.addEventListener('click', () => {
+            mobileMenuMain.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuCloseMain.addEventListener('click', () => {
+            mobileMenuMain.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu when clicking on a link (both mobile menus if applicable)
+        const mobileNavLinksMain = document.querySelectorAll('.mobile-nav-items a'); // Select links in main mobile menu
+        mobileNavLinksMain.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuMain.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+
+        // Sync theme toggle between mobile and desktop
+        if (mobileThemeToggleMain && themeToggleMain) {
+            mobileThemeToggleMain.addEventListener('click', () => {
+                themeToggleMain.click(); // Trigger the main theme toggle
+            });
+             themeToggleMain.addEventListener('click', toggleTheme); // Add event listener to main toggle
+        }
+
+
+        // Story Cards Click Event
+        storyCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const storyId = card.getAttribute('data-story-id');
+                loadStory(storyId);
+            });
+        });
+
+        // Back Button Event
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            hideStoryPage(); // Hide the story page and show the main content
+             // Restore scroll position (if you want this feature)
+            // window.scrollTo(0, lastScrollPosition); // Re-enable if you saved scroll position
+        });
+
+        // Load Story Function
+        function loadStory(storyId) {
+            showLoader();
+
+            // Hide the main content when story page opens
+             gsap.to(mainContent, {
+                duration: 0.3,
+                opacity: 0,
+                onComplete: () => {
+                    mainContent.style.display = 'none';
+
+
+                    // Simulate loading delay
+                    setTimeout(() => {
+                        // In a real app, you would fetch this data from an API
+                        const storyData = getStoryData(storyId);
+
+                        // Update story page content
+                        storyPageTitle.textContent = storyData.title;
+                        storyPageAuthor.textContent = storyData.author;
+                        storyPageAuthorImg.src = storyData.authorImg;
+                        storyPageDate.textContent = storyData.date;
+                        storyPageCategory.textContent = storyData.category;
+                        storyHeaderImage.style.backgroundImage = `url(${storyData.headerImage})`;
+                        storyPageBody.innerHTML = storyData.content;
+
+                        // Show story page with animation
+                        storyPage.style.display = 'block';
+                        gsap.to('#story-page', {
+                            duration: 0.5,
+                            opacity: 1,
+                            onComplete: () => {
+                                document.body.style.overflow = 'hidden'; // Prevent scrolling main page
+                                hideLoader();
+                            }
+                        });
+
+                        // Scroll to top of story page
+                        window.scrollTo(0, 0);
+                    }, 500); // Reduced loading delay
+                }
+            });
+        }
+
+        function hideStoryPage() {
+    console.log("Back button clicked, attempting to hide story page..."); // Check if function is called
+
+    // Check if elements exist
+    if (!storyPage || !mainContent) {
+        console.error("Error: storyPage or mainContent element not found!");
+        return;
+    }
+
+    storyPage.style.opacity = '0'; // Start fade out (optional, helps smooth transition)
+    storyPage.style.display = 'none'; // Hide story page
+
+    mainContent.style.display = 'block'; // Show main content
+    mainContent.style.opacity = '1'; // Make sure it's fully visible
+
+    document.body.style.overflow = ''; // Restore scrolling
+
+    // Optional: Restore scroll position if 'lastScrollPosition' variable exists and is set
+    if (typeof lastScrollPosition !== 'undefined') {
+         window.scrollTo(0, lastScrollPosition);
+    } else {
+         window.scrollTo(0, 0); // Or just scroll to top
+    }
+     console.log("Story page should be hidden, main content shown.");
+}
+
+        // Show Loader
+        function showLoader() {
+            loader.classList.add('active');
+        }
+
+        // Hide Loader
+        function hideLoader() {
+            loader.classList.remove('active');
+        }
+
+
+        // Mock Story Data
+        function getStoryData(storyId) {
+            const stories = {
+                '1': {
+                    title: 'මහල්ලාගේ කෝට්ටුව',
+                    author: 'සමීර පෙරේරා',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,man',
+                    date: 'මාර්තු 12, 2025',
+                    category: 'භූතයෝ',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?haunted,house,old',
+                    content: `
+                        <p>මම සහ මගේ මිතුරා අපේ ගම්මානයේ ඈත පිහිටි පැරණි ගෙදරකට ගියා. ඒ ගෙදර ගැන අමුතු කතා තිබුණා. ගමේ මහල්ලෝ කිව්වා ඒ ගෙදර තුල කවුරුත් රැයක් ගත කලේ නැහැ කියලා. අපි තර්ක කලා ඒවා මිනිස්සු කියන කතා විතරයි කියලා.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?haunted,house,night" alt="Haunted House">
+
+                        <p>රාත්‍රියේ අපි ඒ ගෙදර ඇතුලට ගියා. මුලින්ම සියල්ල සාමාන්‍ය වුනා. ඒත් මැදියමට පසුව අපි අසා ශබ්ද. එය පියවර ශබ්දයක් වගේ උනා. අපි බය උනා, නමුත් යන්න බැරි උනා. අපි බැලුවා ඉහල මහලට යන පඩිපෙළ දෙස. එතන සෙවනැල්ලක් දැක්කා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය ගෙදර අයිතිකාරයාගේ ආත්මය විය හැකියි. ඔහු මිය ගියේ අවුරුදු 50කට පෙර. ඔහුගේ ආත්මය තවමත් ඒ ගෙදර සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>අපි ඒ රාත්‍රිය ගෙදර ගත කලා. උදේ එළියත් එක්ක අපි පැන ගියා. ඒත් මම දැනගත්තා ඒ ගෙදර ගැන කිව්වේ සත්‍යය කියලා. අදත් මම සිහින වලින් අවදි උනාම ඒ පඩිපෙළෙන් එන පියවර ශබ්ද ඇසෙනවා.</p>
+                    `
+                },
+                '2': {
+                    title: 'ඈන්ලිස් මිෂෙල්',
+                    author: 'උපුටා ගැනීමකි (මෙහි සම්පූර්ණ අයිතිය මුල් හිමි කරු සතුයී)',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,asian',
+                    date: 'අප්‍රේල් 3, 2025',
+                    category: 'Popular Story Of This Week',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?dark,room,door',
+                    content: `
+                        <p>ජර්මනියේ නිහඬ බවාරියානු ගම්මානයක, 1952 සැප්තැම්බර් 21 වන දින උපත ලැබූ ඈන්ලිස් මිෂෙල් (Anneliese Michel)නම් තරුණියගේ ජීවිතය අඳුරු සෙවනැල්ලකින් වැසී ගියේය. සාමාන්‍ය තරුණියකගේ සතුටු සිතුවිලි වෙනුවට ඇය මුහුණ දුන්නේ පැහැදිලි කළ නොහැකි අත්දැකීම්වලටය. 1976 ජූලි 1 වන දින, ඇයගේ තරුණ ජීවිතය හදිසියේම නිමාවට පත් වූයේ බොහෝ දෙනා මවිතයට පත් කරමිනි. ඇගේ මරණය වටා ගෙතී ඇති අභිරහස අදටත් ලොව පුරා කතාබහට ලක්වන්නේ ඇයට යක්ෂ ආවේශයක් සිදු වූ බවට පැතිර ගිය විශ්වාසයත්, එය දුරු කිරීමට ගත් අසාර්ථක උත්සාහයත් නිසාය</p>
+
+                        <p>1968 වසරේදී, 16 හැවිරිදි ඈන්ලිස් හට මුල් වරට කිසිවෙකුටත් නිශ්චිතව පැහැදිලි කළ නොහැකි රෝග ලක්ෂණ පහළ විය. හදිසියේ ඇති වූ ශරීර කම්පන තත්ත්වය වෛද්‍යවරුන් විසින් එපිලෙප්සි ලෙස හඳුනා ගත්තද, කාලයත් සමඟ ඇයගේ තත්වය තවත් දරුණු අතට හැරුණේ කාටත් රහසක් ලෙසිනි. 1970 ගණන්වලදී ඇයට විවිධ මනොබ්‍රාන්ති (hallucinations), අවපීඩනය(,depression) සහ අසාමාන්‍ය හැසිරීම් ඇති වූ අතර, 1973-75 කාලය වන විට ඇගේ රෝග ලක්ෂණ වඩාත් බරපතල විය. ඇය ආහාර ගැනීම අඩු කළාය, ආගමික වස්තුන්ට බියක් පෙන්නුවාය, සහ විවිධ හඬවල් වලින් කතා කිරීමට පටන් ගත්තාය.ඇගේ පවුලේ දැඩි කතෝලික විශ්වාසයත් සමඟ, මෙම අද්භූත රෝග ලක්ෂණ යක්ෂ ආවේශයක ප්‍රතිඵලයක් ලෙස ඔවුහු විශ්වාස කළහ. වෛද්‍ය ප්‍රතිකාරවලින් සුවයක් නොලැබුණු තැන, ඔවුහු දෙවියන්ගේ පිහිට පැතීමට තීරණය කළහ.</p>
+
+                        <p>ඈන්ලිස්ගේ පවුල සහ පූජකවරුන් ඇයගේ අසාමාන්‍ය හැසිරීම් (ශුද්ධ වස්තුන්ට බිය, යාඥා ප්‍රතික්ෂේප කිරීම),විවිධ හඬින් කතා කිරීම (ගැඹුරු හා බියකරු හඬවල්), අසාමාන්‍ය ශක්තිය සහ ඇය නොදන්නා භාෂාවලින් (ලතින් වැනි) කතා කිරීම යක්ෂ ආවේශයකට සාක්ෂි ලෙස සැලකූහ. යක්ෂ එළවීමේ චාරිත්‍රවලදී, ඈන්ලිස් (හෝ ඇය තුළ සිටි ආත්මයන්) තමන් ලෙස ලුසිෆර්, ජුදාස් ඉස්කාරියොට්, නීරෝ, කායින්, හි*ලර් සහ ෆ්ලෙයිෂ්මාන් යන නම් හඳුන්වා දුන්හ. කිතුනු ආගමේ ප්‍රධානතම යක්ෂයා ලෙස සැලකෙන ලුසිෆර්, ඈන්ලිස් තුළ සිටින ප්‍රබලතම යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඇයගේ හඬින් කතා කළ මොහු බොහෝ විට ආඩම්බර සහ අහංකාර ස්වරූපයක් පෙන්නුම් කළ බවත්, දෙවියන්ට සහ ආගමික සංකේතවලට දැඩි ලෙස අපහාස කළ බවත් වාර්තා වෙනවා.ජෙසුස් ක්‍රිස්තුස්ව වහන්සේව පාවා දුන්  පුද්ගලයාවන ජුදාස් ඉස්කාරියොට් ද ඈන්ලිස් තුළ සිටින යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඔහු පාවාදීමේ පාපය ගැන නිරන්තරයෙන් කතා කළ බවත්, තමා සදාකාලිකව දඬුවම් ලබන බව පවසමින් දුක් වූ බවත් වාර්තා වෙනවා.රෝම අධිරාජ්‍යයේ කුරිරු පාලකයා ලෙස ඉතිහාසයේ ප්‍රසිද්ධ නීරෝ ද ඈන්ලිස් තුළ සිටින යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඔහු තමාගේ කුරිරු ක්‍රියාවන් ගැන පුරසාරම් දොඩමින් අන් අය සතුටින් වධ හිංසා කළ බව පවසා තිබෙනවා. ආදම් සහ ඒවගේ වැඩිමහල් පුත්‍රයා වන කායින්, තම සහෝදරයා ආබෙල් ඝාතනය කිරීම නිසා ප්‍රසිද්ධියක් උසුලනවා. ඈන්ලිස් තුළ සිටි මෙම යක්ෂයා තම සහෝදරයා මැරීම ගැන පසුතැවෙලි වන බවක් පෙන්නුම් කළ බව වාර්තා වෙනවා.නා* ජර්මනියේ නායකයා වූ ඇඩොල්ෆ් හි&ලර් ද ඈන්ලිස් තුළ සිටින යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඔහු තම දේශපාලන මතවාද සහ යුද අපරාධ ගැන කතා කළ බවත්, තමාගේ ක්‍රියාවන් සාධාරණීකරණය කිරීමට උත්සාහ කළ බවත් වාර්තා වෙනවා.ෆ්ලෙයිෂ්මාන් යනු16වන සියවසේ විසූ යම් පූජකවරයෙකුගේ හෝ ආගමික පුද්ගලයෙකුගේ ආත්මය ලෙස මෙම යක්ෂයා හඳුන්වා දී තිබුණා. ඔහු ගැන වැඩි තොරතුරු වාර්තා වී නැති අතර, ඔහුගේ පැමිණීම අනෙක් යක්ෂයන් තරම් ප්‍රමුඛ නොවූ බව පෙනේ.
+                        කෙසේ වෙතත්, විද්‍යාත්මක මතය වන්නේ මෙම හැසිරීම් එපිලෙප්සි, භින්නෝන්මාදය (Schizophrenia) හෝ බහු අනන්‍යතා ආබාධය (Dissociative Identity Disorder) වැනි මානසික රෝගවල ලක්ෂණ විය හැකි බවයි. ඇගේ ආගමික පසුබිම සහ පවුලේ විශ්වාසයන් ඇගේ මානසික තත්වය තවත් උත්සන්න කරන්නට ඇති බව මනෝවිද්‍යාඥයෝ පවසති.</p>
+
+                    `
+                },
+                '3': {
+                    title: 'රාත්‍රි දුම්රිය',
+                    author: 'මාලිනී ජයවර්ධන',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,woman',
+                    date: 'අප්‍රේල් 15, 2025',
+                    category: 'පෙරේත',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?train,night,ghost',
+                    content: `
+                        <p>රාත්‍රි 12 පසුවූ පසු නොපෙනෙන වූ දුම්රිය ගැන ඔබ අසා තිබේද? එය මාගේ අත්දැකීමකි. මම ගියේ රාත්‍රියේ අවසන් දුම්රියෙන්. නමුත් අපි ගමනාන්තයට ලඟා වෙද්දී, දුම්රිය පොළවේ නතර වුනා. එතන තිබුණේ පැරණි දුම්රිය ස්ථානයක්. එහෙත් එය දැන් භාවිතා නොකරන එකක්.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?train,station,night" alt="Train at Night">
+
+                        <p>මම දුම්රියෙන් බැස බැලුවා. එතන කිසිවෙක් නැහැ. නමුත් මම අසා ශබ්ද. එය පියවර ශබ්දයක් වගේ උනා. මම බය උනා, නමුත් යන්න බැරි උනා. මම බැලුවා දුම්රිය ස්ථානයේ දොර දෙස. එතන සෙවනැල්ලක් දැක්කා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය දුම්රිය ස්ථානයේ පැරණි සේවකයෙකුගේ ආත්මය විය හැකියි. ඔහු මිය ගියේ අවුරුදු 40කට පෙර. ඔහුගේ ආත්මය තවමත් ඒ දුම්රිය ස්ථානයේ සැරිසරනවා කියලා අසල්වැසියෝ කිව්වා.</p>
+
+                        <p>මම ඒ දුම්රිය ස්ථානයෙන් පැන ගියා. ඒත් මම දැනගත්තා ඒ දුම්රිය ස්ථානය ගැන කිව්වේ සත්‍යය කියලා. අදත් මම සිහින වලින් අවදි උනාම ඒ දුම්රිය ස්ථානයේ එන පියවර ශබ්ද ඇසෙනවා.</p>
+                    `
+                },
+                '4': {
+                    title: 'සුදු වස්ත්‍රය',
+                    author: 'තුෂාර රණසිංහ',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,asian,woman',
+                    date: 'මාර්තු 27, 2025',
+                    category: 'මායා',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?white,dress,ghost',
+                    content: `
+                        <p>මගේ මව කුඩා කල මට කියූ කතාවකි. අපේ පැරණි ගෙදර වටේ සුදු වස්ත්‍රයකින් වැසුණු කාන්තාවක් සැරිසරනවා. ඇය කවදාවත් කිසිවෙකුට හානියක් කර නැති බවත්, නමුත් ඇයව දුටු අය ඉක්මනින්ම රෝගී වී මිය යන බවත් මා කීවා.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?ghost,white,dress" alt="White Dress Ghost">
+
+                        <p>මම හිතුවා ඒවා ලොකු අය කියන කතා විතරයි කියලා. ඒත් මම දැක්කා ඒ සුදු වස්ත්‍රයෙන් වැසුණු කාන්තාවව. ඇය අපේ ගෙදර වටේ සැරිසරනවා. මම බය උනා, නමුත් යන්න බැරි උනා. මම බැලුවා ඇය දෙස. ඇය මා දෙස බැලුවා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය අපේ ගෙදර පැරණි අයිතිකාරිණියගේ ආත්මය විය හැකියි. ඇය මිය ගියේ අවුරුදු 60කට පෙර. ඇයගේ ආත්මය තවමත් ඒ ගෙදර සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>මම ඒ ගෙදර තවමත් ජීවත් වෙනවා. ඒත් රාත්‍රියේදී මම තවමත් ඒ සුදු වස්ත්‍රයෙන් වැසුණු කාන්තාවව දකිනවා. මම දැන් ඇයව බය නොවෙනවා. නමුත් මම දන්නවා ඇය සත්‍යය කියලා.</p>
+                    `
+                },
+                '5': {
+                    title: 'කටු පඳුරේ නිවස',
+                    author: 'නිශාදි පෙරේරා',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,man,asian',
+                    date: 'අප්‍රේල් 8, 2025',
+                    category: 'රහස්',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?thorns,house,abandoned',
+                    content: `
+                        <p>ගමේ කාටවත් යන්න අකමැති පැත්තක තිබෙන පැරණි නිවසක්. ඒ නිවස වටේ කටු පඳුරු වැවිලා. ගමේ මහල්ලෝ කිව්වා ඒ නිවස තුල අමුතු දේවල් සිදුවෙනවා කියලා. අපි ළමයි කාලේ ඒ නිවස ගැන බොහෝ කතා ඇසුවා.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?abandoned,house,thorns" alt="House with Thorns">
+
+                        <p>ඒත් එක් දවසක් මගේ මිතුරා ඒ නිවසට ගියා. ඔහු ආපහු ආවේ නැහැ. අපි ඔහුව සොයා ගියා. ඒත් ඔහුව සොයා ගන්න බැරි උනා. අපි බැලුවා ඒ නිවස ඇතුලට. එතන කිසිවෙක් නැහැ. නමුත් අපි අසා ශබ්ද. එය පියවර ශබ්දයක් වගේ උනා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය ඒ නිවසේ පැරණි අයිතිකාරයාගේ ආත්මය විය හැකියි. ඔහු මිය ගියේ අවුරුදු 70කට පෙර. ඔහුගේ ආත්මය තවමත් ඒ නිවසේ සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>මම ඒ නිවස ගැන තවමත් සිහින දකිනවා. ඒත් මම දන්නවා ඒවා සත්‍යය කියලා. මගේ මිතුරා ගැන මම තවමත් සිහි කරනවා. ඔහු කොහෙද යන්නේ කියලා.</p>
+                    `
+                },
+                '6': {
+                    title: 'අතුරුදහන් වූ දරුවා',
+                    author: 'අරුණ විජේසිංහ',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,man,elderly',
+                    date: 'අප්‍රේල් 20, 2025',
+                    category: 'මළවුන්',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?cemetery,child,ghost',
+                    content: `
+                        <p>අවුරුදු 30කට කලින් මේ ගමේ අතුරුදහන් වූ දරුවෙක් ගැන මම ඇසුවා. පසුව ඒ දරුවා ගැන සත්‍යය දැනගත්තා. ඒ දරුවාගේ මව මිය ගියා උපත් දෙන විටම. දරුවා වැඩුනේ තාත්තා සහ නැන්දම්මා සමග.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?child,ghost,cemetery" alt="Ghost Child">
+
+                        <p>එක් දවසක් දරුවා ගෙදර ඉදන් අතුරුදහන් වුනා. ගමේ සියල්ලෝ එයාව සොයා ගියා. ඒත් කිසිවෙකුට සාක්ෂි නැතිව එයාව සොයා ගන්න බැරි උනා. අවුරුදු 30කට පසු මම දැක්කා ඒ දරුවාව. එයා ගමේ සුසාන භූමියේ සැරිසරනවා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය ඒ දරුවාගේ ආත්මය විය හැකියි. එයා මිය ගියේ අවුරුදු 30කට පෙර. එයාගේ ආත්මය තවමත් ඒ සුසාන භූමියේ සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>මම ඒ දරුවාව තවමත් දකිනවා. ඒත් මම දන්නවා එයා සත්‍යය කියලා. එයාගේ කතාව මම තවමත් කියනවා. එයාගේ මතකය ජීවත් වෙනවා.</p>
+                    `
+                }
+            };
+
+            return stories[storyId];
+        }
+
+        // Floating Action Button - Scroll to Top
+        fab.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Show/hide FAB based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                fab.style.display = 'flex';
+            } else {
+                fab.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const backBtn = document.getElementById('back-btn');
+    const storyPage = document.getElementById('story-page');
+    const mainContent = document.querySelector('.main-content');
+
+    if (backBtn) {
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
+            storyPage.style.display = 'none'; // Hide the story page
+            mainContent.style.display = 'block'; // Show the main content
+            document.body.style.overflow = ''; // Restore scrolling
+            window.scrollTo(0, 0); // Scroll to top of the main content
+        });
+    } else {
+        console.error("Back button not found!");
+    }
+});
+
+
+        // Initialize theme
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        // Update theme icon based on current theme
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                mobileThemeToggle.innerHTML = '<span>Light Mode</span><i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                mobileThemeToggle.innerHTML = '<span>Dark Mode</span><i class="fas fa-moon"></i>';
+            }
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+
+            // Add animation to story cards when theme changes
+            gsap.from('.story-card', {
+                duration: 0.5,
+                opacity: 0,
+                y: 20,
+                stagger: 0.1,
+                ease: 'power2.out'
+            });
+        }
+
+            // Story navigation functionality (Removed as per user request)
+    // const prevStoryBtn = document.getElementById('prev-story');
+    // const nextStoryBtn = document.getElementById('next-story');
+    let currentStoryId = null;
+
+    // Update navigation buttons based on current story (Modified)
+    function updateNavButtons() {
+        // Buttons removed, so no need to update their state
+    }
+
+    // Modify the loadStory function to track current story
+    function loadStory(storyId) {
+        currentStoryId = parseInt(storyId);
+        updateNavButtons();
+        // ... rest of the existing loadStory code ...
+    }
+
+    // Add event listeners for navigation (Removed as per user request)
+    // prevStoryBtn.addEventListener('click', () => {
+    //     if (currentStoryId > 1) {
+    //         loadStory(currentStoryId - 1);
+    //     }
+    // });
+
+    // nextStoryBtn.addEventListener('click', () => {
+    //     if (currentStoryId < 6) { // Update this if you add more stories
+    //         loadStory(currentStoryId + 1);
+    //     }
+    // });
+
+      // Update mobile theme toggle text based on current theme
+      function updateMobileThemeText() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            mobileThemeToggle.innerHTML = '<span>Light Mode</span><i class="fas fa-sun"></i>';
+        } else {
+            mobileThemeToggle.innerHTML = '<span>Dark Mode</span><i class="fas fa-moon"></i>';
+        }
+    }
+
+    const additionalStoryItems = document.querySelectorAll('.additional-story-item');
+
+    additionalStoryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const storyId = item.getAttribute('data-story-id');
+            loadStory(storyId);
+        });
+    });
+
+    // Initialize theme
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        updateMobileThemeText();
+    }
+
+    // Add this to the theme toggle function
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        updateMobileThemeText();
+    }
+
+    function getStoryData(storyId) {
+        const stories = {
+            '1': {
+                    title: 'මහල්ලාගේ කෝට්ටුව',
+                    author: 'සමීර පෙරේරා',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,man',
+                    date: 'මාර්තු 12, 2025',
+                    category: 'භූතයෝ',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?haunted,house,old',
+                    content: `
+                        <p>මම සහ මගේ මිතුරා අපේ ගම්මානයේ ඈත පිහිටි පැරණි ගෙදරකට ගියා. ඒ ගෙදර ගැන අමුතු කතා තිබුණා. ගමේ මහල්ලෝ කිව්වා ඒ ගෙදර තුල කවුරුත් රැයක් ගත කලේ නැහැ කියලා. අපි තර්ක කලා ඒවා මිනිස්සු කියන කතා විතරයි කියලා.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?haunted,house,night" alt="Haunted House">
+
+                        <p>රාත්‍රියේ අපි ඒ ගෙදර ඇතුලට ගියා. මුලින්ම සියල්ල සාමාන්‍ය වුනා. ඒත් මැදියමට පසුව අපි අසා ශබ්ද. එය පියවර ශබ්දයක් වගේ උනා. අපි බය උනා, නමුත් යන්න බැරි උනා. අපි බැලුවා ඉහල මහලට යන පඩිපෙළ දෙස. එතන සෙවනැල්ලක් දැක්කා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය ගෙදර අයිතිකාරයාගේ ආත්මය විය හැකියි. ඔහු මිය ගියේ අවුරුදු 50කට පෙර. ඔහුගේ ආත්මය තවමත් ඒ ගෙදර සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>අපි ඒ රාත්‍රිය ගෙදර ගත කලා. උදේ එළියත් එක්ක අපි පැන ගියා. ඒත් මම දැනගත්තා ඒ ගෙදර ගැන කිව්වේ සත්‍යය කියලා. අදත් මම සිහින වලින් අවදි උනාම ඒ පඩිපෙළෙන් එන පියවර ශබ්ද ඇසෙනවා.</p>
+                    `
+                },
+                '2': {
+                    title: 'ඈන්ලිස් මිෂෙල්',
+                    author: 'උපුටා ගැනීමකි (මෙහි සම්පූර්ණ අයිතිය මුල් හිමි කරු සතුයී)',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,asian',
+                    date: 'අප්‍රේල් 3, 2025',
+                    category: 'Popular Story Of This Week',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?dark,room,door',
+                    content: `
+                        <p>ජර්මනියේ නිහඬ බවාරියානු ගම්මානයක, 1952 සැප්තැම්බර් 21 වන දින උපත ලැබූ ඈන්ලිස් මිෂෙල් (Anneliese Michel)නම් තරුණියගේ ජීවිතය අඳුරු සෙවනැල්ලකින් වැසී ගියේය. සාමාන්‍ය තරුණියකගේ සතුටු සිතුවිලි වෙනුවට ඇය මුහුණ දුන්නේ පැහැදිලි කළ නොහැකි අත්දැකීම්වලටය. 1976 ජූලි 1 වන දින, ඇයගේ තරුණ ජීවිතය හදිසියේම නිමාවට පත් වූයේ බොහෝ දෙනා මවිතයට පත් කරමිනි. ඇගේ මරණය වටා ගෙතී ඇති අභිරහස අදටත් ලොව පුරා කතාබහට ලක්වන්නේ ඇයට යක්ෂ ආවේශයක් සිදු වූ බවට පැතිර ගිය විශ්වාසයත්, එය දුරු කිරීමට ගත් අසාර්ථක උත්සාහයත් නිසාය</p>
+
+                        <p>1968 වසරේදී, 16 හැවිරිදි ඈන්ලිස් හට මුල් වරට කිසිවෙකුටත් නිශ්චිතව පැහැදිලි කළ නොහැකි රෝග ලක්ෂණ පහළ විය. හදිසියේ ඇති වූ ශරීර කම්පන තත්ත්වය වෛද්‍යවරුන් විසින් එපිලෙප්සි ලෙස හඳුනා ගත්තද, කාලයත් සමඟ ඇයගේ තත්වය තවත් දරුණු අතට හැරුණේ කාටත් රහසක් ලෙසිනි. 1970 ගණන්වලදී ඇයට විවිධ මනොබ්‍රාන්ති (hallucinations), අවපීඩනය(,depression) සහ අසාමාන්‍ය හැසිරීම් ඇති වූ අතර, 1973-75 කාලය වන විට ඇගේ රෝග ලක්ෂණ වඩාත් බරපතල විය. ඇය ආහාර ගැනීම අඩු කළාය, ආගමික වස්තුන්ට බියක් පෙන්නුවාය, සහ විවිධ හඬවල් වලින් කතා කිරීමට පටන් ගත්තාය.ඇගේ පවුලේ දැඩි කතෝලික විශ්වාසයත් සමඟ, මෙම අද්භූත රෝග ලක්ෂණ යක්ෂ ආවේශයක ප්‍රතිඵලයක් ලෙස ඔවුහු විශ්වාස කළහ. වෛද්‍ය ප්‍රතිකාරවලින් සුවයක් නොලැබුණු තැන, ඔවුහු දෙවියන්ගේ පිහිට පැතීමට තීරණය කළහ.</p>
+
+                        <p>ඈන්ලිස්ගේ පවුල සහ පූජකවරුන් ඇයගේ අසාමාන්‍ය හැසිරීම් (ශුද්ධ වස්තුන්ට බිය, යාඥා ප්‍රතික්ෂේප කිරීම),විවිධ හඬින් කතා කිරීම (ගැඹුරු හා බියකරු හඬවල්), අසාමාන්‍ය ශක්තිය සහ ඇය නොදන්නා භාෂාවලින් (ලතින් වැනි) කතා කිරීම යක්ෂ ආවේශයකට සාක්ෂි ලෙස සැලකූහ. යක්ෂ එළවීමේ චාරිත්‍රවලදී, ඈන්ලිස් (හෝ ඇය තුළ සිටි ආත්මයන්) තමන් ලෙස ලුසිෆර්, ජුදාස් ඉස්කාරියොට්, නීරෝ, කායින්, හි*ලර් සහ ෆ්ලෙයිෂ්මාන් යන නම් හඳුන්වා දුන්හ. කිතුනු ආගමේ ප්‍රධානතම යක්ෂයා ලෙස සැලකෙන ලුසිෆර්, ඈන්ලිස් තුළ සිටින ප්‍රබලතම යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඇයගේ හඬින් කතා කළ මොහු බොහෝ විට ආඩම්බර සහ අහංකාර ස්වරූපයක් පෙන්නුම් කළ බවත්, දෙවියන්ට සහ ආගමික සංකේතවලට දැඩි ලෙස අපහාස කළ බවත් වාර්තා වෙනවා.ජෙසුස් ක්‍රිස්තුස්ව වහන්සේව පාවා දුන්  පුද්ගලයාවන ජුදාස් ඉස්කාරියොට් ද ඈන්ලිස් තුළ සිටින යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඔහු පාවාදීමේ පාපය ගැන නිරන්තරයෙන් කතා කළ බවත්, තමා සදාකාලිකව දඬුවම් ලබන බව පවසමින් දුක් වූ බවත් වාර්තා වෙනවා.රෝම අධිරාජ්‍යයේ කුරිරු පාලකයා ලෙස ඉතිහාසයේ ප්‍රසිද්ධ නීරෝ ද ඈන්ලිස් තුළ සිටින යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඔහු තමාගේ කුරිරු ක්‍රියාවන් ගැන පුරසාරම් දොඩමින් අන් අය සතුටින් වධ හිංසා කළ බව පවසා තිබෙනවා. ආදම් සහ ඒවගේ වැඩිමහල් පුත්‍රයා වන කායින්, තම සහෝදරයා ආබෙල් ඝාතනය කිරීම නිසා ප්‍රසිද්ධියක් උසුලනවා. ඈන්ලිස් තුළ සිටි මෙම යක්ෂයා තම සහෝදරයා මැරීම ගැන පසුතැවෙලි වන බවක් පෙන්නුම් කළ බව වාර්තා වෙනවා.නා* ජර්මනියේ නායකයා වූ ඇඩොල්ෆ් හි&ලර් ද ඈන්ලිස් තුළ සිටින යක්ෂයෙකු ලෙස හඳුනාගෙන තිබුණා. ඔහු තම දේශපාලන මතවාද සහ යුද අපරාධ ගැන කතා කළ බවත්, තමාගේ ක්‍රියාවන් සාධාරණීකරණය කිරීමට උත්සාහ කළ බවත් වාර්තා වෙනවා.ෆ්ලෙයිෂ්මාන් යනු16වන සියවසේ විසූ යම් පූජකවරයෙකුගේ හෝ ආගමික පුද්ගලයෙකුගේ ආත්මය ලෙස මෙම යක්ෂයා හඳුන්වා දී තිබුණා. ඔහු ගැන වැඩි තොරතුරු වාර්තා වී නැති අතර, ඔහුගේ පැමිණීම අනෙක් යක්ෂයන් තරම් ප්‍රමුඛ නොවූ බව පෙනේ.
+                        කෙසේ වෙතත්, විද්‍යාත්මක මතය වන්නේ මෙම හැසිරීම් එපිලෙප්සි, භින්නෝන්මාදය (Schizophrenia) හෝ බහු අනන්‍යතා ආබාධය (Dissociative Identity Disorder) වැනි මානසික රෝගවල ලක්ෂණ විය හැකි බවයි. ඇගේ ආගමික පසුබිම සහ පවුලේ විශ්වාසයන් ඇගේ මානසික තත්වය තවත් උත්සන්න කරන්නට ඇති බව මනෝවිද්‍යාඥයෝ පවසති.</p>
+
+                    `
+                },
+                '3': {
+                    title: 'රාත්‍රි දුම්රිය',
+                    author: 'මාලිනී ජයවර්ධන',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,woman',
+                    date: 'අප්‍රේල් 15, 2025',
+                    category: 'පෙරේත',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?train,night,ghost',
+                    content: `
+                        <p>රාත්‍රි 12 පසුවූ පසු නොපෙනෙන වූ දුම්රිය ගැන ඔබ අසා තිබේද? එය මාගේ අත්දැකීමකි. මම ගියේ රාත්‍රියේ අවසන් දුම්රියෙන්. නමුත් අපි ගමනාන්තයට ලඟා වෙද්දී, දුම්රිය පොළවේ නතර වුනා. එතන තිබුණේ පැරණි දුම්රිය ස්ථානයක්. එහෙත් එය දැන් භාවිතා නොකරන එකක්.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?train,station,night" alt="Train at Night">
+
+                        <p>මම දුම්රියෙන් බැස බැලුවා. එතන කිසිවෙක් නැහැ. නමුත් මම අසා ශබ්ද. එය පියවර ශබ්දයක් වගේ උනා. මම බය උනා, නමුත් යන්න බැරි උනා. මම බැලුවා දුම්රිය ස්ථානයේ දොර දෙස. එතන සෙවනැල්ලක් දැක්කා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය දුම්රිය ස්ථානයේ පැරණි සේවකයෙකුගේ ආත්මය විය හැකියි. ඔහු මිය ගියේ අවුරුදු 40කට පෙර. ඔහුගේ ආත්මය තවමත් ඒ දුම්රිය ස්ථානයේ සැරිසරනවා කියලා අසල්වැසියෝ කිව්වා.</p>
+
+                        <p>මම ඒ දුම්රිය ස්ථානයෙන් පැන ගියා. ඒත් මම දැනගත්තා ඒ දුම්රිය ස්ථානය ගැන කිව්වේ සත්‍යය කියලා. අදත් මම සිහින වලින් අවදි උනාම ඒ දුම්රිය ස්ථානයේ එන පියවර ශබ්ද ඇසෙනවා.</p>
+                    `
+                },
+                '4': {
+                    title: 'සුදු වස්ත්‍රය',
+                    author: 'තුෂාර රණසිංහ',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,asian,woman',
+                    date: 'මාර්තු 27, 2025',
+                    category: 'මායා',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?white,dress,ghost',
+                    content: `
+                        <p>මගේ මව කුඩා කල මට කියූ කතාවකි. අපේ පැරණි ගෙදර වටේ සුදු වස්ත්‍රයකින් වැසුණු කාන්තාවක් සැරිසරනවා. ඇය කවදාවත් කිසිවෙකුට හානියක් කර නැති බවත්, නමුත් ඇයව දුටු අය ඉක්මනින්ම රෝගී වී මිය යන බවත් මා කීවා.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?ghost,white,dress" alt="White Dress Ghost">
+
+                        <p>මම හිතුවා ඒවා ලොකු අය කියන කතා විතරයි කියලා. ඒත් මම දැක්කා ඒ සුදු වස්ත්‍රයෙන් වැසුණු කාන්තාවව. ඇය අපේ ගෙදර වටේ සැරිසරනවා. මම බය උනා, නමුත් යන්න බැරි උනා. මම බැලුවා ඇය දෙස. ඇය මා දෙස බැලුවා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය අපේ ගෙදර පැරණි අයිතිකාරිණියගේ ආත්මය විය හැකියි. ඇය මිය ගියේ අවුරුදු 60කට පෙර. ඇයගේ ආත්මය තවමත් ඒ ගෙදර සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>මම ඒ ගෙදර තවමත් ජීවත් වෙනවා. ඒත් රාත්‍රියේදී මම තවමත් ඒ සුදු වස්ත්‍රයෙන් වැසුණු කාන්තාවව දකිනවා. මම දැන් ඇයව බය නොවෙනවා. නමුත් මම දන්නවා ඇය සත්‍යය කියලා.</p>
+                    `
+                },
+                '5': {
+                    title: 'කටු පඳුරේ නිවස',
+                    author: 'නිශාදි පෙරේරා',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,man,asian',
+                    date: 'අප්‍රේල් 8, 2025',
+                    category: 'රහස්',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?thorns,house,abandoned',
+                    content: `
+                        <p>ගමේ කාටවත් යන්න අකමැති පැත්තක තිබෙන පැරණි නිවසක්. ඒ නිවස වටේ කටු පඳුරු වැවිලා. ගමේ මහල්ලෝ කිව්වා ඒ නිවස තුල අමුතු දේවල් සිදුවෙනවා කියලා. අපි ළමයි කාලේ ඒ නිවස ගැන බොහෝ කතා ඇසුවා.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?abandoned,house,thorns" alt="House with Thorns">
+
+                        <p>ඒත් එක් දවසක් මගේ මිතුරා ඒ නිවසට ගියා. ඔහු ආපහු ආවේ නැහැ. අපි ඔහුව සොයා ගියා. ඒත් ඔහුව සොයා ගන්න බැරි උනා. අපි බැලුවා ඒ නිවස ඇතුලට. එතන කිසිවෙක් නැහැ. නමුත් අපි අසා ශබ්ද. එය පියවර ශබ්දයක් වගේ උනා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය ඒ නිවසේ පැරණි අයිතිකාරයාගේ ආත්මය විය හැකියි. ඔහු මිය ගියේ අවුරුදු 70කට පෙර. ඔහුගේ ආත්මය තවමත් ඒ නිවසේ සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>මම ඒ නිවස ගැන තවමත් සිහින දකිනවා. ඒත් මම දන්නවා ඒවා සත්‍යය කියලා. මගේ මිතුරා ගැන මම තවමත් සිහි කරනවා. ඔහු කොහෙද යන්නේ කියලා.</p>
+                    `
+                },
+                '6': {
+                    title: 'අතුරුදහන් වූ දරුවා',
+                    author: 'අරුණ විජේසිංහ',
+                    authorImg: 'https://source.unsplash.com/random/100x100/?portrait,man,elderly',
+                    date: 'අප්‍රේල් 20, 2025',
+                    category: 'මළවුන්',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?cemetery,child,ghost',
+                    content: `
+                        <p>අවුරුදු 30කට කලින් මේ ගමේ අතුරුදහන් වූ දරුවෙක් ගැන මම ඇසුවා. පසුව ඒ දරුවා ගැන සත්‍යය දැනගත්තා. ඒ දරුවාගේ මව මිය ගියා උපත් දෙන විටම. දරුවා වැඩුනේ තාත්තා සහ නැන්දම්මා සමග.</p>
+
+                        <img src="https://source.unsplash.com/random/800x500/?child,ghost,cemetery" alt="Ghost Child">
+
+                        <p>එක් දවසක් දරුවා ගෙදර ඉදන් අතුරුදහන් වුනා. ගමේ සියල්ලෝ එයාව සොයා ගියා. ඒත් කිසිවෙකුට සාක්ෂි නැතිව එයාව සොයා ගන්න බැරි උනා. අවුරුදු 30කට පසු මම දැක්කා ඒ දරුවාව. එයා ගමේ සුසාන භූමියේ සැරිසරනවා.</p>
+
+                        <p>මම හිතුවා ඒවා අපේ නැතිවුනා කියලා. නමුත් එය ඒ දරුවාගේ ආත්මය විය හැකියි. එයා මිය ගියේ අවුරුදු 30කට පෙර. එයාගේ ආත්මය තවමත් ඒ සුසාන භූමියේ සැරිසරනවා කියලා ගමේ මහල්ලෝ කිව්වා.</p>
+
+                        <p>මම ඒ දරුවාව තවමත් දකිනවා. ඒත් මම දන්නවා එයා සත්‍යය කියලා. එයාගේ කතාව මම තවමත් කියනවා. එයාගේ මතකය ජීවත් වෙනවා.</p>
+                    `
+                },
+                '7': {
+                    title: 'The Whispering Well',
+                    author: 'Unknown Writer',
+                    authorImg: 'unknown.png',
+                    date: 'April 10, 2025',
+                    category: 'Ghost',
+                    headerImage: 'https://source.unsplash.com/random/1920x1080/?well,haunted',
+                    content: `<p>In our village, there was an old well that no one used anymore. They said if you listened closely at midnight, you could hear whispers...</p>
+                          <p>One night, a group of friends dared each other to go to the well. They lowered a bucket and heard faint voices calling their names...</p>`
+            },
+            '8': {
+                title: 'The Last Train Passenger',
+                author: 'Unknown Writer',
+                authorImg: 'unknown.png',
+                date: 'April 5, 2025',
+                category: 'Mystery',
+                headerImage: 'https://source.unsplash.com/random/1920x1080/?train,station,abandoned',
+                content: `<p>Every night at 3:07 AM, the station master sees one extra passenger board the last train. But no one ever sees them get off...</p>
+                          <p>Locals whisper that it's the ghost of a woman who lost her child and searches for him on every train...</p>`
+            }
+            // ... Add more stories here
+        };
+
+        return stories[storyId];
+    }
+
+    // Initialize theme
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+        updateMobileThemeText();
+    }
+
+    // Update theme icon based on current theme
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            mobileThemeToggle.innerHTML = '<span>Light Mode</span><i class="fas fa-sun"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            mobileThemeToggle.innerHTML = '<span>Dark Mode</span><i class="fas fa-moon"></i>';
+        }
+    }
+
+    // Update mobile theme toggle text based on current theme
+    function updateMobileThemeText() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            mobileThemeToggle.innerHTML = '<span>Light Mode</span><i class="fas fa-sun"></i>';
+        } else {
+            mobileThemeToggle.innerHTML = '<span>Dark Mode</span><i class="fas fa-moon"></i>';
+        }
+    }
+
+    // Toggle theme
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        updateMobileThemeText();
+    }
+
+    // Initialize theme on page load
+    initTheme();
+
+    // Add event listeners for theme toggles
+    themeToggle.addEventListener('click', toggleTheme);
+    mobileThemeToggle.addEventListener('click', toggleTheme);
+
+
+        // Initialize theme on page load
+        initTheme();
+
+        // Add event listeners for theme toggles
+        themeToggle.addEventListener('click', toggleTheme);
+        mobileThemeToggle.addEventListener('click', toggleTheme);
+
+
+        storyCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const storyId = card.getAttribute('data-story-id');
+
+                // Add click animation
+                gsap.to(card, {
+                    duration: 0.3,
+                    scale: 0.95,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        loadStory(storyId);
+                        gsap.to(card, { duration: 0.3, scale: 1 });
+                    }
+                });
+            });
+        });
+
+        // Improved image loading
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('img');
+
+        images.forEach(img => {
+            // Add loading state
+            img.parentElement.classList.add('loading');
+
+            img.onload = function() {
+                this.parentElement.classList.remove('loading');
+                this.parentElement.classList.add('loaded');
+            };
+
+            img.onerror = function() {
+                this.parentElement.classList.remove('loading');
+                this.parentElement.classList.add('error');
+            };
+        });
+    });
+
+// Back Button Event
+if (backBtn) { // Check if backBtn element exists
+    backBtn.addEventListener('click', (e) => {
+        console.log("Back button event listener triggered!"); // Check if listener fires
+        e.preventDefault();
+        hideStoryPage();
+    });
+} else {
+    console.error("Error: Back button element not found!");
+}
+
+    let lastScrollPosition = 0;
+
+    // Load Story Function
+    function loadStory(storyId) {
+        showLoader();
+
+        // Save scroll position
+        lastScrollPosition = window.pageYOffset;
+
+        // Simulate loading delay
+        setTimeout(() => {
+            // In a real app, you would fetch this data from an API
+            const storyData = getStoryData(storyId);
+
+            // Update story page content
+            storyPageTitle.textContent = storyData.title;
+            storyPageAuthor.textContent = storyData.author;
+            storyPageAuthorImg.src = storyData.authorImg;
+            storyPageDate.textContent = storyData.date;
+            storyPageCategory.textContent = storyData.category;
+            storyHeaderImage.style.backgroundImage = `url(${storyData.headerImage})`;
+            storyPageBody.innerHTML = storyData.content;
+
+            // Show story page
+            storyPage.style.display = 'block';
+            setTimeout(() => {
+                storyPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                hideLoader();
+            }, 50);
+
+            // Scroll to top of story page
+            window.scrollTo(0, 0);
+        }, 1000);
+    }
+
+        // Back Button Event
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
+            hideStoryPage();    // Call the function to hide the story page
+             // Restore scroll position (if you want this feature)
+            window.scrollTo(0, lastScrollPosition);
+        });
+
+        // Hide Story Page Function
+        function hideStoryPage() {
+            // This function hides the story page and restores body scrolling
+            storyPage.classList.remove('active');
+            // Use GSAP for animation if preferred, or a simple display none after transition
+             gsap.to('#story-page', {
+                duration: 0.3,
+                opacity: 0,
+                onComplete: () => {
+                    storyPage.style.display = 'none';
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+            // Or a simpler version:
+            /*
+            setTimeout(() => {
+                storyPage.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300); // Match this duration to your CSS transition
+            */
+        }
+
+        // ... (rest of your JavaScript code) ...
+
+    // Swipe gestures for mobile story navigation (Modified as per user request)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    storyPage.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    storyPage.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+        // Swipe functionality removed as per user request for removing previous/next story buttons
+        // if (touchEndX < touchStartX - 50) {
+        //     // Swipe left - next story
+        //     if (currentStoryId < 6) {
+        //         loadStory(currentStoryId + 1);
+        //     }
+        // }
+
+        // if (touchEndX > touchStartX + 50) {
+        //     // Swipe right - previous story
+        //     if (currentStoryId > 1) {
+        //         loadStory(currentStoryId - 1);
+        //     }
+        // }
+    }
+
+
+        // Enhanced Story Loading Function
+        function loadStory(storyId) {
+            showLoader();
+
+            // Simulate loading delay
+            setTimeout(() => {
+                const storyData = getStoryData(storyId);
+
+                // Update story page content with animation
+                gsap.to('#story-page', {
+                    duration: 0,
+                    opacity: 0,
+                    onComplete: () => {
+                        storyPageTitle.textContent = storyData.title;
+                        storyPageAuthor.textContent = storyData.author;
+                        storyPageAuthorImg.src = storyData.authorImg;
+                        storyPageDate.textContent = storyData.date;
+                        storyPageCategory.textContent = storyData.category;
+                        storyHeaderImage.style.backgroundImage = `url(${storyData.headerImage})`;
+                        storyPageBody.innerHTML = storyData.content;
+
+                        // Show story page with animation
+                        storyPage.style.display = 'block';
+                        gsap.to('#story-page', {
+                            duration: 0.5,
+                            opacity: 1,
+                            onComplete: () => {
+                                document.body.style.overflow = 'hidden';
+                                hideLoader();
+                            }
+                        });
+                    }
+                });
+
+                window.scrollTo(0, 0);
+            }, 800);
+        }
+
+        // Initialize Three.js
+        initThreeJS();
+
+        // GSAP Animations
+        gsap.from('.hero h1', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+
+        gsap.from('.hero p', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.6
+        });
+
+        gsap.from('.hero-btn', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.9
+        });
+
+        gsap.from('.story-card', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            stagger: 0.1,
+            delay: 1.2,
+            scrollTrigger: {
+                trigger: '.stories-grid',
+                start: 'top 80%'
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
